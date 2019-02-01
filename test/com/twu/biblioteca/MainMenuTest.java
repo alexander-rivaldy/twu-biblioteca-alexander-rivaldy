@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -22,38 +21,34 @@ public class MainMenuTest {
     }
 
     @Rule
-    public ExpectedException failure = ExpectedException.none();
+    public final ExpectedException failure = ExpectedException.none();
+
 
     @Test
     public void printingMenu() {
         assertThat(menu.getMenuOptions(),
-                is("1. List of Books\n"));
+                is("0. Quit\n1. List of Books\n"));
     }
 
     @Test
     public void correctOption() throws Exception{
         //1 is List of Books, an option that will always be in the menu
-        assertThat(menu.chooseOption(1), is(true));
+        assertThat(menu.checkOption(1), is(true));
     }
 
     @Test
     public void wrongOptionShouldThrowWrongMenuOptionException() throws Exception{
         failure.expect(WrongMenuOptionException.class);
-        menu.chooseOption(2);
+        menu.checkOption(2);
     }
 
     @Test
     public void wrongOptionShouldShowAMessageToCustomer() throws Exception{
         failure.expect(WrongMenuOptionException.class);
         failure.expectMessage("Please select a valid option!");
-        menu.chooseOption(2);
+        menu.checkOption(2);
     }
 
-    @Test
-    public void wrongInputTypeShouldThrowWrongMenuOptionException() throws Exception{
-        failure.expect(WrongMenuOptionException.class);
-        menu.chooseOption("a");
-    }
 
 
 
