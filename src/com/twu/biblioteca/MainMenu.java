@@ -16,6 +16,8 @@ public class MainMenu {
 
     HashMap<Integer, String> validOptions;
 
+    Scanner reader;
+
     public MainMenu(){
         initialMenu();
     }
@@ -28,15 +30,22 @@ public class MainMenu {
 
     public void run(){
         System.out.println(welcomeMessage());
-        System.out.println();
-        System.out.println(getMenuOptions());
-        int input = -1;
-        try {
-            input = askForOptionInput();
-            checkOption(input);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        reader = new Scanner(System.in);
+        while(true){
+            int input = -1;
+            printMenu();
+            try {
+                input = askForOptionInput(reader);
+                checkOption(input);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
+    }
+
+    public void printMenu(){
+        System.out.println("\nChoose an option from the list below: \n");
+        System.out.println(getMenuOptions());
     }
 
     public String getMenuOptions(){
@@ -48,17 +57,19 @@ public class MainMenu {
     }
 
     public boolean checkOption(int option) throws Exception{
+        if(option == 0) {
+            reader.close();
+            System.exit(1);
+        }
         if (validOptions.containsKey(option))
             return true;
         else
             throw new WrongMenuOptionException("Please select a valid option!");
     }
 
-    public int askForOptionInput(){
+    public int askForOptionInput(Scanner reader){
         System.out.print("\nEnter your desired option: ");
-        Scanner reader = new Scanner(System.in);
         int input = reader.nextInt();
-        reader.close();
         return input;
     }
 

@@ -23,6 +23,14 @@ public class MainMenuTest {
     @Rule
     public final ExpectedException failure = ExpectedException.none();
 
+    /*
+        ExpectedSystemExit was initially going to be used to test whether
+        the input 0 would close the program, but the current JUnit implemented
+        in this app does not support it
+     */
+//    @Rule
+//    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
+
 
     @Test
     public void printingMenu() {
