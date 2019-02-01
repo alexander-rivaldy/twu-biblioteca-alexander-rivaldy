@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -16,6 +17,8 @@ public class MainMenu {
 
     HashMap<Integer, String> validOptions;
 
+    Library library;
+
     Scanner reader;
 
     public MainMenu(){
@@ -26,6 +29,11 @@ public class MainMenu {
         validOptions = new HashMap<Integer, String>();
         validOptions.put(EXIT, "Quit");
         validOptions.put(BOOK_LIST, "List of Books");
+
+        library = new Library();
+        library.addBook("Test Driven Development");
+        library.addBook("Object Oriented Programming");
+        library.addBook("Thoughtworks University");
     }
 
     public void run(){
@@ -37,7 +45,9 @@ public class MainMenu {
             try {
                 input = askForOptionInput(reader);
                 checkOption(input);
-            } catch (Exception e) {
+                executeOption(input);
+            }
+            catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -57,14 +67,22 @@ public class MainMenu {
     }
 
     public boolean checkOption(int option) throws Exception{
-        if(option == 0) {
-            reader.close();
-            System.exit(1);
-        }
         if (validOptions.containsKey(option))
             return true;
         else
             throw new WrongMenuOptionException("Please select a valid option!");
+    }
+
+    public void executeOption(int option) {
+        switch(option){
+            case 0:
+                reader.close();
+                System.exit(1);
+                break;
+            case 1:
+                System.out.println(library.getAllBookTitle());
+                break;
+        }
     }
 
     public int askForOptionInput(Scanner reader){
