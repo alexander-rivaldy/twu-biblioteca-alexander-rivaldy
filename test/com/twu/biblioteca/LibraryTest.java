@@ -20,21 +20,29 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldPrintOneBookTitleWhenThereIsOneBook(){
-        library.addBook("Title1");
-        assertThat(library.getAllBookTitle(), is("1. Title1\n"));
+    public void shouldPrintOneBookDetailsWhenThereIsOneBook(){
+        library.addBook(new Book("Title 1", "Author 1", "2000"));
+        assertThat(library.getAllBookDetails(),
+                is(" | 1  | Title 1              | Author 1        | 2000 |\n"));
+    }
+    @Test
+    public void shouldPrintBothBookDetailsWhenThereAreTwoBooks(){
+        library.addBook(new Book("Title 1", "Author 1", "2000"));
+        library.addBook(new Book("Title 2", "Author 2", "2002"));
+        assertThat(library.getAllBookDetails(),
+                is(" | 1  | Title 1              | Author 1        | 2000 |\n" +
+                   " | 2  | Title 2              | Author 2        | 2002 |\n"));
     }
 
     @Test
-    public void shouldPrintBothBookTitleWhenThereAreTwoBooks(){
-        library.addBook("Title1");
-        library.addBook("Title2");
-        assertThat(library.getAllBookTitle(), is("1. Title1\n2. Title2\n"));
-    }
-
-    @Test
-    public void shouldGiveMessageWhenThereIsNoBook(){
-        assertThat(library.getAllBookTitle(), is("There are no books!"));
+    public void shouldPrintBookDetailsWithColumns(){
+        library.addBook(new Book("Title 3", "Author 3", "2019"));
+        //60
+        String expected =
+                " | No | Title                | Author          | Year |\n" +
+                "---------------------------------------------------------\n" +
+                " | 1  | Title 3              | Author 3        | 2019 |\n";
+        assertThat(library.getAllBookDetailsWithColumn(), is(expected));
     }
 
 }

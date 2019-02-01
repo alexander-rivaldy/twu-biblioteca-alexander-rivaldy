@@ -7,24 +7,38 @@ import java.util.ArrayList;
  */
 public class Library {
 
-    ArrayList<String> books;
+    static final int MAX_COLUMN = 57;
+
+    ArrayList<Book> books;
 
     public Library(){
-        books = new ArrayList<String>();
+        books = new ArrayList<Book>();
     }
 
-    public void addBook(String title){
-        books.add(title);
+    public void addBook(Book book){
+        books.add(book);
     }
 
-    public String getAllBookTitle(){
-        if(books.isEmpty())
-            return "There are no books!";
-
+    public String getAllBookDetails(){
         String allBooks = "";
-        for(String book : books){
-            allBooks += (books.indexOf(book)+1) + ". " + book + "\n";
+        String format = "";
+        for(Book book : books){
+            format = String.format(" | %-2s |%-48s\n",
+                    ""+(books.indexOf(book)+1),book.getFullDetail());
+            allBooks += format;
         }
+
         return allBooks;
     }
+
+    public String getAllBookDetailsWithColumn(){
+        String allBooksWithColumn = String.format(" | %-2s | %-20s | %-15s | %4s |\n",
+                "No", "Title", "Author", "Year");
+        for(int i=0; i<MAX_COLUMN; i++){
+            allBooksWithColumn += "-";
+        }
+        return allBooksWithColumn + "\n" + getAllBookDetails() ;
+    }
+
+
 }

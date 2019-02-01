@@ -31,9 +31,9 @@ public class MainMenu {
         validOptions.put(BOOK_LIST, "List of Books");
 
         library = new Library();
-        library.addBook("Test Driven Development");
-        library.addBook("Object Oriented Programming");
-        library.addBook("Thoughtworks University");
+        library.addBook(new Book("Test Driven Development", "Kent Beck", "2003"));
+        library.addBook(new Book("The People Vs Tech", "Jamie Bartlett", "2018"));
+        library.addBook(new Book("The Alchemist", "Paulo Coelho", "1988"));
     }
 
     public void run(){
@@ -87,7 +87,7 @@ public class MainMenu {
                 System.exit(1);
                 break;
             case 1:
-                System.out.println(library.getAllBookTitle());
+                System.out.println(library.getAllBookDetailsWithColumn());
                 break;
         }
     }
