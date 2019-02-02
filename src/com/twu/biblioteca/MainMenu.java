@@ -27,6 +27,9 @@ public class MainMenu {
         initialMenu();
     }
 
+    /**
+     * Function to initialize all menu items as well as the library contents
+     */
     public void initialMenu(){
         validOptions = new HashMap<Integer, String>();
         validOptions.put(EXIT, "Quit");
@@ -60,11 +63,21 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Function to print the menu options
+     */
     public void printMenu(){
         System.out.println("\nChoose an option from the list below: \n");
         System.out.println(getMenuOptions());
     }
 
+    /**
+     * Construct a String of all available menu options
+     * @return has the format of
+     *  0. Quit
+     *  1. List of Books
+     * and so on
+     */
     public String getMenuOptions(){
         String menu = "";
         for(Map.Entry<Integer,String> option : validOptions.entrySet()){
@@ -73,6 +86,13 @@ public class MainMenu {
         return menu;
     }
 
+    /**
+     * Function to check whether or not the user input of option is valid
+     * @param option user input
+     * @return boolean of true
+     * @throws Exception will throw WrongMenuOptionException, telling the calling
+     *    function that user has inputted a wrong value
+     */
     public boolean checkOption(int option) throws Exception{
         if (validOptions.containsKey(option))
             return true;
@@ -80,6 +100,10 @@ public class MainMenu {
             throw new WrongMenuOptionException("Please select a valid option!");
     }
 
+    /**
+     * Function to execute the option entered by the user accordingly
+     * @param option user input of option
+     */
     public void executeOption(int option) {
         switch(option){
             case 0:
@@ -98,6 +122,13 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Prompt user to input which option they want to execute
+     * @param reader to make sure that the app only uses 1 Scanner
+     * @return
+     *     -1 if the value entered is not valid
+     *     otherwise, it will pass on the user input
+     */
     public int askForOptionInput(Scanner reader){
         System.out.print("\nEnter your desired option: ");
         String input = reader.nextLine();

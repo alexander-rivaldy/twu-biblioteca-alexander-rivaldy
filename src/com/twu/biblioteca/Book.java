@@ -24,6 +24,11 @@ public class Book {
         this.available = available;
     }
 
+    /**
+     * Constructs a string containing details of the book
+     * @return has the format of
+     *  Title 1              | Author 1        | 2001 |
+     */
     public String getFullDetail(){
         if((title == null && author == null && year == null) ||
                 (title.isEmpty() && author.isEmpty() && year.isEmpty()))
@@ -34,6 +39,11 @@ public class Book {
         return detail;
     }
 
+    /**
+     * Function to borrow the book, changing the available boolean to false
+     * or throwing an exception when it has been checked out already
+     * @throws BookCannotBeCheckedOutException when book has been checked out
+     */
     public void borrow() throws BookCannotBeCheckedOutException {
         if(available)
             available = false;
@@ -41,6 +51,11 @@ public class Book {
             throw new BookCannotBeCheckedOutException("Sorry, that book is not available");
     }
 
+    /**
+     * Function to return the book changing the available boolean to true
+     * or throwing an exception when it is still available
+     * @throws BookNotValidForReturnException when book is still available
+     */
     public void returnBook() throws BookNotValidForReturnException {
         if(!available)
             available = true;

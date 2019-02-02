@@ -20,6 +20,12 @@ public class Library {
         books.add(book);
     }
 
+    /**
+     * Constructs a string containing information of all available books
+     * @return has the format of
+     *       | 1  | Title 3              | Author 3        | 2001 |
+     *       | 2  | Title 4              | Author 4        | 2002 |
+     */
     public String getAvailableBooks(){
         String allBooks = "";
         String format = "";
@@ -36,6 +42,14 @@ public class Library {
 
     }
 
+
+    /**
+     * Adds a column on top of list of books
+     * @return has the format of
+     *    | No | Title                | Author          | Year |
+     *   ---------------------------------------------------------
+     *       followed by the list of books
+     */
     public String getAllBookDetailsWithColumn(){
         String allBooksWithColumn = String.format(" | %-2s | %-20s | %-15s | %4s |\n",
                 "No", "Title", "Author", "Year");
@@ -45,6 +59,12 @@ public class Library {
         return allBooksWithColumn + "\n" + getAvailableBooks() ;
     }
 
+
+    /**
+     * function that handles all borrowing logic
+      * @param reader to make sure that the app only uses 1 Scanner
+     * @return status of the checkout
+     */
     public String borrowProcess(Scanner reader){
         String title = askForTitle(reader);
         try{
@@ -58,6 +78,11 @@ public class Library {
         return "\nThank you! Enjoy the book\n";
     }
 
+    /**
+     * function that handles all returning logic
+     * @param reader to make sure that the app only uses 1 Scanner
+     * @return status of the return
+     */
     public String returnProcess(Scanner reader){
         String title = askForTitle(reader);
         try{
@@ -70,12 +95,24 @@ public class Library {
         return "\nThank you for returning the book\n";
     }
 
+    /**
+     * Function to get user input on book title
+     * @param reader to make sure that the app only uses 1 Scanner
+     * @return the user input
+     */
     public String askForTitle(Scanner reader){
         System.out.print("Enter title of book: ");
         String input = reader.nextLine();
         return input;
     }
 
+    /**
+     * Function to iterate through the Book ArrayList and find a book with
+     * certain title. If it is not found, it will throw an Exception
+     * @param title title of the book to be found
+     * @return the Book object
+     * @throws BookNotFoundException when book is not found
+     */
     public Book findBook(String title) throws BookNotFoundException{
         for(Book book : books){
             if(book.getTitle().equals(title))
