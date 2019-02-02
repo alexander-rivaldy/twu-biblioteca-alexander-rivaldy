@@ -1,0 +1,66 @@
+BIBLIOTECA DATABASE
+Alexander Rivaldy
+
+1. Answer: Anand Beck
+	SELECT name
+	FROM checkout_item c
+	INNER JOIN member m ON c.member_id = m.id
+	INNER JOIN book b ON c.book_id = b.id
+	WHERE b.title = 'The Hobbit';
+	
+2. Answer: 37
+	SELECT COUNT(id)
+	FROM member
+	WHERE NOT EXISTS
+		(SELECT *
+		FROM checkout_item
+		WHERE checkout_item.member_id = member.id);
+	   
+3. Answer: 
+	Fellowship of the Ring
+	1984
+	Tom Sawyer
+	Catcher in the Rye
+	To Kill a Mockingbird
+	Domain Driven Design
+	Thin Red Line
+	Crouching Tiger, Hidden Dragon
+	Lawrence of Arabia
+	Office Space
+
+	SELECT title
+	FROM book b
+	WHERE NOT EXISTS
+		(SELECT *
+		FROM checkout_item
+		WHERE checkout_item.book_id = b.id )
+	UNION ALL
+	SELECT title
+	FROM movie m
+	WHERE NOT EXISTS
+		(SELECT *
+		FROM checkout_item
+		WHERE checkout_item.movie_id = m.id );
+		
+4. 
+	INSERT INTO book (title) VALUES ("The Pragmatic Programmer");
+	INSERT INTO member (name) VALUES ("Alexander Rivaldy");
+	
+	INSERT INTO checkout_item (member_id, book_id) 
+	VALUES ( (SELECT id FROM member WHERE name ="Alexander Rivaldy"),
+			(SELECT id FROM book WHERE title="The Pragmatic Programmer"));
+	
+5. Answer: 
+	Anand Beck
+	Frank Smith
+
+	SELECT name
+	FROM member m
+	WHERE EXISTS
+		(SELECT *
+		FROM checkout_item c
+		WHERE m.id = c.member_id
+		GROUP BY member_id
+		HAVING COUNT(member_id) > 1);
+	
+	
