@@ -51,11 +51,7 @@ public class MainMenu {
                 checkOption(input);
                 executeOption(input);
             }
-            //in a case when user puts in a non integer value, this will
-            //get rid of the \n value so an infinite loop could be avoided
             catch (InputMismatchException e){
-                reader.next();
-                // !!!!! DUPLICATION
                 System.out.println("Please select a valid option!");
             }
             catch (Exception e) {
