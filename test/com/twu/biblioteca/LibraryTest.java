@@ -81,20 +81,11 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldFindDesiredBookAndMakeItNotAvailable(){
-        Book book = new Book("Title 8", "Author 8", "2019");
-        library.borrowBook(book);
-        assertThat(book.isAvailable(), is(false));
-    }
-
-    @Test
-    public void shouldGetUserInputAndCheckOutABookCorrectly(){
-        Book wantToBorrow = new Book("Title 11", "Author 11", "2019");
-        library.addBook(new Book("Title 9", "Author 9", "2019"));
-        library.addBook(new Book("Title 10", "Author 10", "2019"));
+    public void shouldGetUserInputAndCheckOutABookCorrectly() throws Exception{
+        Book wantToBorrow = new Book("Title 9", "Author 9", "2019");
         library.addBook(wantToBorrow);
 
-        String data = "Title 11";
+        String data = "Title 9";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
 
         library.borrowProcess(new Scanner(System.in));
@@ -102,6 +93,8 @@ public class LibraryTest {
         assertThat(wantToBorrow.isAvailable(), is(false));
 
     }
+
+
 
 
 

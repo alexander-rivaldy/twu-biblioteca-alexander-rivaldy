@@ -34,8 +34,11 @@ public class Book {
         return detail;
     }
 
-    public void borrow(){
-        available = false;
+    public void borrow() throws BookCannotBeCheckedOutException {
+        if(available)
+            available = false;
+        else
+            throw new BookCannotBeCheckedOutException("Sorry, that book is not available");
     }
 
     public String getTitle(){ return title; }

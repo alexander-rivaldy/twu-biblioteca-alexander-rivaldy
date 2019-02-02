@@ -50,21 +50,17 @@ public class Library {
         try{
             findBook(title).borrow();
         }
-        catch(BookNotFoundException e){
+        //Exception could be BookCannotBeCheckedOutException or BookNotFoundException
+        catch(Exception e){
             return e.getMessage();
         }
-        return "\nThe book " + title + " has been successfully checked out!\n";
+
+        return "\nThank you! Enjoy the book\n";
     }
 
     public String askForTitle(Scanner reader){
-//        Scanner reader = new Scanner(System.in);
         String input = reader.nextLine();
-//        reader.close();
         return input;
-    }
-
-    public void borrowBook(Book book){
-        book.borrow();
     }
 
     public Book findBook(String title) throws BookNotFoundException{
