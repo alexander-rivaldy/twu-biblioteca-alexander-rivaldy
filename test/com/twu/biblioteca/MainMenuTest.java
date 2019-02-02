@@ -35,7 +35,7 @@ public class MainMenuTest {
     @Test
     public void printingMenu() {
         assertThat(menu.getMenuOptions(),
-                is("0. Quit\n1. List of Books\n"));
+                is("0. Quit\n1. List of Books\n2. Checkout Book\n"));
     }
 
     @Test
@@ -47,14 +47,14 @@ public class MainMenuTest {
     @Test
     public void wrongOptionShouldThrowWrongMenuOptionException() throws Exception{
         failure.expect(WrongMenuOptionException.class);
-        menu.checkOption(2);
+        menu.checkOption(-1);
     }
 
     @Test
     public void wrongOptionShouldShowAMessageToCustomer() throws Exception{
         failure.expect(WrongMenuOptionException.class);
         failure.expectMessage("Please select a valid option!");
-        menu.checkOption(2);
+        menu.checkOption(-1);
     }
 
 

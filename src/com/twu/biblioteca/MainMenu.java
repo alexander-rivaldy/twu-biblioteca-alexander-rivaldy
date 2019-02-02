@@ -30,7 +30,7 @@ public class MainMenu {
         validOptions = new HashMap<Integer, String>();
         validOptions.put(EXIT, "Quit");
         validOptions.put(BOOK_LIST, "List of Books");
-        validOptions.put(CHECKOUT_BOOK, "Checkout book");
+        validOptions.put(CHECKOUT_BOOK, "Checkout Book");
 
         library = new Library();
         library.addBook(new Book("Test Driven Development", "Kent Beck", "2003"));
