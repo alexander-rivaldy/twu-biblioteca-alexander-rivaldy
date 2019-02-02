@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by alexa on 1/02/2019.
@@ -19,16 +20,20 @@ public class Library {
         books.add(book);
     }
 
-    public String getAllBookDetails(){
+    public String getAvailableBooks(){
         String allBooks = "";
         String format = "";
+        int counter = 1;
         for(Book book : books){
+            if (!book.isAvailable())
+                continue;
             format = String.format(" | %-2s |%-48s\n",
-                    ""+(books.indexOf(book)+1),book.getFullDetail());
+                    ""+ counter++,book.getFullDetail());
             allBooks += format;
         }
 
         return allBooks;
+
     }
 
     public String getAllBookDetailsWithColumn(){
@@ -37,8 +42,45 @@ public class Library {
         for(int i=0; i<MAX_COLUMN; i++){
             allBooksWithColumn += "-";
         }
-        return allBooksWithColumn + "\n" + getAllBookDetails() ;
+        return allBooksWithColumn + "\n" + getAvailableBooks() ;
     }
+
+    public String borrowProcess(){
+        String title = askForTitle();
+        try{
+            findBook(title).borrow();
+        }
+        catch(BookNotFoundException e){
+            return e.getMessage();
+        }
+        return "\nThe book " + title + " has been successfully checked out!\n";
+    }
+
+    public String askForTitle(){
+        Scanner reader = new Scanner(System.in);
+        String input = reader.nextLine();
+        reader.next();
+        reader.close();
+        return input;
+    }
+
+    public void borrowBook(Book book){
+        book.borrow();
+    }
+
+    public Book findBook(String title) throws BookNotFoundException{
+        for(Book book : books){
+            if(book.getTitle().equals(title))
+                return book;
+        }
+        throw new BookNotFoundException("Book is not in the Library!");
+    }
+
+
+
+
+
+
 
 
 }
