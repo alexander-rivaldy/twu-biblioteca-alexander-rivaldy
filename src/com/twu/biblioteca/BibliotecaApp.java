@@ -2,7 +2,12 @@ package com.twu.biblioteca;
 
 public class BibliotecaApp {
 
+    /**
+     * Main function to run the whole application
+     * @param args
+     */
     public static void main(String[] args) {
-        System.out.println("Hello, world!");
+        MainMenu menu = new MainMenu();
+        menu.run();
     }
 }
