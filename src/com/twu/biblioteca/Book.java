@@ -41,6 +41,13 @@ public class Book {
             throw new BookCannotBeCheckedOutException("Sorry, that book is not available");
     }
 
+    public void returnBook() throws BookNotValidForReturnException {
+        if(!available)
+            available = true;
+        else
+            throw new BookNotValidForReturnException("That is not a valid book to return");
+    }
+
     public String getTitle(){ return title; }
 
     public boolean isAvailable(){

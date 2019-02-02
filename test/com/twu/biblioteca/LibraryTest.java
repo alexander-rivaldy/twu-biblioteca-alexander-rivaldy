@@ -94,6 +94,22 @@ public class LibraryTest {
 
     }
 
+    @Test
+    public void shouldGetUserInputAndReturnABookCorrectly() throws Exception{
+        Book wantToBorrow = new Book("Title 10", "Author 9", "2019", false);
+        library.addBook(wantToBorrow);
+
+        String data = "Title 10";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+
+        library.borrowProcess(new Scanner(System.in));
+
+        assertThat(wantToBorrow.isAvailable(), is(false));
+
+    }
+
+
+
 
 
 

@@ -59,6 +59,15 @@ public class BookTest {
     }
 
     @Test
+    public void shouldThrowBookNotValidForReturnExceptionWhenReturningAnAvailableBook() throws Exception{
+        failure.expect(BookNotValidForReturnException.class);
+
+        book = new Book("Title 4", null, null, true);
+
+        book.returnBook();
+    }
+
+    @Test
     @Ignore
     public void successCheckForYear(){
 

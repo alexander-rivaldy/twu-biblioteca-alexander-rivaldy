@@ -52,13 +52,26 @@ public class Library {
         }
         //Exception could be BookCannotBeCheckedOutException or BookNotFoundException
         catch(Exception e){
-            return e.getMessage();
+            return "\nSorry, that book is not available\n";
         }
 
         return "\nThank you! Enjoy the book\n";
     }
 
+    public String returnProcess(Scanner reader){
+        String title = askForTitle(reader);
+        try{
+            findBook(title).returnBook();
+        }
+        //Exception could be BookNotValidForReturnException or BookNotFoundException
+        catch(Exception e){
+            return "\nThat is not a valid book to return\n";
+        }
+        return "\nThank you for returning the book\n";
+    }
+
     public String askForTitle(Scanner reader){
+        System.out.print("Enter title of book: ");
         String input = reader.nextLine();
         return input;
     }

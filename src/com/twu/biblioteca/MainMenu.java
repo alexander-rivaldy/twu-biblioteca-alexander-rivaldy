@@ -15,6 +15,7 @@ public class MainMenu {
     public static final int EXIT = 0;
     public static final int BOOK_LIST = 1;
     public static final int CHECKOUT_BOOK = 2;
+    public static final int RETURN_BOOK = 3;
 
     HashMap<Integer, String> validOptions;
 
@@ -31,6 +32,7 @@ public class MainMenu {
         validOptions.put(EXIT, "Quit");
         validOptions.put(BOOK_LIST, "List of Books");
         validOptions.put(CHECKOUT_BOOK, "Checkout Book");
+        validOptions.put(RETURN_BOOK, "Return Book");
 
         library = new Library();
         library.addBook(new Book("Test Driven Development", "Kent Beck", "2003"));
@@ -93,6 +95,9 @@ public class MainMenu {
                 break;
             case 2:
                 System.out.println(library.borrowProcess(reader));
+                break;
+            case 3:
+                System.out.println(library.returnProcess(reader));
                 break;
         }
     }
