@@ -59,7 +59,6 @@ public class Library {
     public String askForTitle(){
         Scanner reader = new Scanner(System.in);
         String input = reader.nextLine();
-        reader.next();
         reader.close();
         return input;
     }

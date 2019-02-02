@@ -92,6 +92,7 @@ public class MainMenu {
                 System.out.println(library.getAllBookDetailsWithColumn());
                 break;
             case 2:
+                System.out.println(library.borrowProcess());
                 break;
         }
     }
