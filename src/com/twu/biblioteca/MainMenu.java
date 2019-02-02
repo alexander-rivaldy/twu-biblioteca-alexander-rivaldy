@@ -50,7 +50,7 @@ public class MainMenu {
                 executeOption(input);
             }
             //in a case when user puts in a non integer value, this will
-            //get rid of the value so an infinite loop could be avoided
+            //get rid of the \n value so an infinite loop could be avoided
             catch (InputMismatchException e){
                 reader.next();
                 // !!!!! DUPLICATION
@@ -92,15 +92,23 @@ public class MainMenu {
                 System.out.println(library.getAllBookDetailsWithColumn());
                 break;
             case 2:
-                System.out.println(library.borrowProcess());
+                System.out.println(library.borrowProcess(reader));
                 break;
         }
     }
 
     public int askForOptionInput(Scanner reader){
         System.out.print("\nEnter your desired option: ");
-        int input = reader.nextInt();
-        return input;
+        String input = reader.nextLine();
+        int option = -1;
+        try{
+            option = Integer.parseInt(input);
+        }
+        catch(Exception e){
+            //entered value is not an integer and will be handled
+            //in calling function
+        }
+        return option;
     }
 
     public String welcomeMessage(){

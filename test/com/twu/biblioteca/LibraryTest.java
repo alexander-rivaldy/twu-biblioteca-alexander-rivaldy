@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.ByteArrayInputStream;
+import java.util.Scanner;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -96,7 +97,7 @@ public class LibraryTest {
         String data = "Title 11";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
 
-        library.borrowProcess();
+        library.borrowProcess(new Scanner(System.in));
 
         assertThat(wantToBorrow.isAvailable(), is(false));
 

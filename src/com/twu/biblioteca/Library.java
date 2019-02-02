@@ -45,8 +45,8 @@ public class Library {
         return allBooksWithColumn + "\n" + getAvailableBooks() ;
     }
 
-    public String borrowProcess(){
-        String title = askForTitle();
+    public String borrowProcess(Scanner reader){
+        String title = askForTitle(reader);
         try{
             findBook(title).borrow();
         }
@@ -56,10 +56,10 @@ public class Library {
         return "\nThe book " + title + " has been successfully checked out!\n";
     }
 
-    public String askForTitle(){
-        Scanner reader = new Scanner(System.in);
+    public String askForTitle(Scanner reader){
+//        Scanner reader = new Scanner(System.in);
         String input = reader.nextLine();
-        reader.close();
+//        reader.close();
         return input;
     }
 
