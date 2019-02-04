@@ -5,7 +5,7 @@ import jdk.nashorn.internal.ir.annotations.Ignore;
 /**
  * Created by alexa on 4/02/2019.
  */
-public class Movie {
+public class Movie implements LibraryItem{
 
     public final int UNRATED = 0;
 
@@ -52,11 +52,15 @@ public class Movie {
         return detail;
     }
 
-    public void borrow() throws ItemCannotBeCheckedOutException{
+    public void borrowItem() throws ItemCannotBeCheckedOutException{
         if(available)
             available = false;
         else
             throw new ItemCannotBeCheckedOutException("That is not a valid book to return");
+    }
+
+    public void returnItem() throws ItemNotValidForReturnException{
+        //not implemented yet
     }
 
     public String getTitle(){

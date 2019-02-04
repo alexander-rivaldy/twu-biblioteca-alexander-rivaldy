@@ -96,7 +96,7 @@ public class Library {
     public String borrowBookProcess(Scanner reader){
         String title = askForTitle(reader);
         try{
-            findBook(title).borrow();
+            findBook(title).borrowItem();
         }
         //Exception could be ItemCannotBeCheckedOutException or ItemNotFoundException
         catch(Exception e){
@@ -109,7 +109,7 @@ public class Library {
     public String borrowMovieProcess(Scanner reader){
         String title = askForTitle(reader);
         try{
-            findMovie(title).borrow();
+            findMovie(title).borrowItem();
         }
         //Exception could be ItemCannotBeCheckedOutException or ItemNotFoundException
         catch(Exception e){
@@ -127,9 +127,9 @@ public class Library {
     public String returnProcess(Scanner reader){
         String title = askForTitle(reader);
         try{
-            findBook(title).returnBook();
+            findBook(title).returnItem();
         }
-        //Exception could be BookNotValidForReturnException or ItemNotFoundException
+        //Exception could be ItemNotValidForReturnException or ItemNotFoundException
         catch(Exception e){
             return "\nThat is not a valid book to return\n";
         }

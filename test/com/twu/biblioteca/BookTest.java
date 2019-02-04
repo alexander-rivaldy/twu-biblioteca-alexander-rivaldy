@@ -51,16 +51,16 @@ public class BookTest {
 
         book = new Book("Title 3", "Author 3", "2019", false);
 
-        book.borrow();
+        book.borrowItem();
     }
 
     @Test
     public void shouldThrowBookNotValidForReturnExceptionWhenReturningAnAvailableBook() throws Exception{
-        failure.expect(BookNotValidForReturnException.class);
+        failure.expect(ItemNotValidForReturnException.class);
 
         book = new Book("Title 4", null, null, true);
 
-        book.returnBook();
+        book.returnItem();
     }
 
     @Test

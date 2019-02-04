@@ -3,7 +3,7 @@ package com.twu.biblioteca;
 /**
  * Created by alexa on 2/02/2019.
  */
-public class Book {
+public class Book implements LibraryItem{
 
     String title;
     String author;
@@ -40,11 +40,11 @@ public class Book {
     }
 
     /**
-     * Function to borrow the book, changing the available boolean to false
+     * Function to borrowItem the book, changing the available boolean to false
      * or throwing an exception when it has been checked out already
      * @throws ItemCannotBeCheckedOutException when book has been checked out
      */
-    public void borrow() throws ItemCannotBeCheckedOutException {
+    public void borrowItem() throws ItemCannotBeCheckedOutException {
         if(available)
             available = false;
         else
@@ -54,13 +54,13 @@ public class Book {
     /**
      * Function to return the book changing the available boolean to true
      * or throwing an exception when it is still available
-     * @throws BookNotValidForReturnException when book is still available
+     * @throws ItemNotValidForReturnException when book is still available
      */
-    public void returnBook() throws BookNotValidForReturnException {
+    public void returnItem() throws ItemNotValidForReturnException {
         if(!available)
             available = true;
         else
-            throw new BookNotValidForReturnException("That is not a valid book to return");
+            throw new ItemNotValidForReturnException("That is not a valid book to return");
     }
 
     public String getTitle(){ return title; }
