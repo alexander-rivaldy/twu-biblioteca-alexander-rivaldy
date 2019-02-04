@@ -36,7 +36,7 @@ public class Movie {
         if(this.rating != UNRATED){
             rating = "" + this.rating;
         }
-        String detail = String.format(" %-20s | %-4s | %-15s | %-7s |",
+        String detail = String.format(" %-20.20s | %-4s | %-15.15s | %-7s |",
                 title, year, director, rating);
         return detail;
     }

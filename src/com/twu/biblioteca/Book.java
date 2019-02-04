@@ -34,7 +34,7 @@ public class Book {
                 (title.isEmpty() && author.isEmpty() && year.isEmpty()))
             return "Error!!! Book has no details";
 
-        String detail = String.format(" %-20s | %-15s | %-4s |",
+        String detail = String.format(" %-20.20s | %-15.15s | %-4s |",
                                         title, author, year);
         return detail;
     }
