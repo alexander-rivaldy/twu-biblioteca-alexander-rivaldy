@@ -19,6 +19,7 @@ public class MainMenu {
     public static final int MOVIE_LIST = 4;
     public static final int CHECKOUT_MOVIE = 5;
 
+
     HashMap<Integer, String> validOptions;
 
     Library library;
@@ -114,23 +115,23 @@ public class MainMenu {
      */
     public void executeOption(int option) {
         switch(option){
-            case 0:
+            case EXIT:
                 reader.close();
                 System.exit(1);
                 break;
-            case 1:
+            case BOOK_LIST:
                 System.out.println(library.getAllBookDetailsWithColumn());
                 break;
-            case 2:
+            case CHECKOUT_BOOK:
                 System.out.println(library.borrowBookProcess(reader));
                 break;
-            case 3:
+            case RETURN_BOOK:
                 System.out.println(library.returnProcess(reader));
                 break;
-            case 4:
+            case MOVIE_LIST:
                 System.out.println(library.getAllMovieDetailsWithColumn());
                 break;
-            case 5:
+            case CHECKOUT_MOVIE:
                 System.out.println(library.borrowMovieProcess(reader));
         }
     }
