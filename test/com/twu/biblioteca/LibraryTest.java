@@ -26,6 +26,10 @@ public class LibraryTest {
         library = new Library();
     }
 
+    /**
+     * The tests below are for a list of books up until the next commenting
+     */
+
     @Test
     public void shouldPrintOneBookDetailsWhenThereIsOneBook(){
         library.addBook(new Book("Title 1", "Author 1", "2000"));
@@ -106,6 +110,37 @@ public class LibraryTest {
 
         assertThat(wantToBorrow.isAvailable(), is(false));
 
+    }
+
+    /**
+     * The tests below are for a list of movies
+     */
+
+    @Test
+    public void shouldPrintOneMovieDetailsWhenThereIsOneBook(){
+        library.addMovie(new Movie("Title 1", "2000", "Director 1", 10));
+        assertThat(library.getAvailableMovies(),
+                is(" | 1  | Title 1              | 2000 | Director 1      | 10      |\n"));
+    }
+
+    @Test
+    public void shouldPrintBothMovieDetailsWhenThereAreTwoBooks(){
+        library.addMovie(new Movie("Title 1", "2000", "Director 1", 1));
+        library.addMovie(new Movie("Title 2", "2002", "Director 2", 5));
+        assertThat(library.getAvailableMovies(),
+                is(" | 1  | Title 1              | 2000 | Director 1      | 1       |\n" +
+                        " | 2  | Title 2              | 2002 | Director 2      | 5       |\n"));
+    }
+
+    @Test
+    public void shouldPrintMovieDetailsWithColumns(){
+        library.addMovie(new Movie("Title 3", "2003", "Director 3", 7));
+        //65
+        String expected =
+                " | No | Title                | Year | Director        | Rating  |\n" +
+                "-----------------------------------------------------------------\n" +
+                " | 1  | Title 3              | 2003 | Director 3      | 7       |\n";
+        assertThat(library.getAllMovieDetailsWithColumn(), is(expected));
     }
 
 

@@ -8,17 +8,21 @@ import java.util.Scanner;
  */
 public class Library {
 
-    static final int MAX_COLUMN = 57;
+    static final int MAX_COLUMN_BOOK = 57;
+    static final int MAX_COLUMN_MOVIE = 65;
 
     ArrayList<Book> books;
+    ArrayList<Movie> movies;
 
     public Library(){
         books = new ArrayList<Book>();
+        movies = new ArrayList<Movie>();
     }
 
     public void addBook(Book book){
         books.add(book);
     }
+    public void addMovie(Movie movie) { movies.add(movie); }
 
     /**
      * Constructs a string containing information of all available books
@@ -42,6 +46,19 @@ public class Library {
 
     }
 
+    public String getAvailableMovies(){
+        String allMovies = "";
+        String format = "";
+        int counter = 1;
+        for(Movie movie : movies){
+            format = String.format(" | %-2s |%-48s\n",
+                    ""+ counter++,movie.getFullDetail());
+            allMovies += format;
+        }
+
+        return allMovies;
+    }
+
 
     /**
      * Adds a column on top of list of books
@@ -53,10 +70,19 @@ public class Library {
     public String getAllBookDetailsWithColumn(){
         String allBooksWithColumn = String.format(" | %-2s | %-20s | %-15s | %4s |\n",
                 "No", "Title", "Author", "Year");
-        for(int i=0; i<MAX_COLUMN; i++){
+        for(int i=0; i<MAX_COLUMN_BOOK; i++){
             allBooksWithColumn += "-";
         }
         return allBooksWithColumn + "\n" + getAvailableBooks() ;
+    }
+
+    public String getAllMovieDetailsWithColumn(){
+        String allMoviesWithColumn = String.format(" | %-2s | %-20s | %-4s | %-15s | %-7s |\n",
+                "No", "Title", "Year", "Director", "Rating");
+        for(int i=0; i<MAX_COLUMN_MOVIE; i++){
+            allMoviesWithColumn += "-";
+        }
+        return allMoviesWithColumn + "\n" + getAvailableMovies() ;
     }
 
 

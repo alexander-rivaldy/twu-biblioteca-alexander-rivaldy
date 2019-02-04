@@ -16,6 +16,7 @@ public class MainMenu {
     public static final int BOOK_LIST = 1;
     public static final int CHECKOUT_BOOK = 2;
     public static final int RETURN_BOOK = 3;
+    public static final int MOVIE_LIST = 4;
 
     HashMap<Integer, String> validOptions;
 
@@ -36,11 +37,16 @@ public class MainMenu {
         validOptions.put(BOOK_LIST, "List of Books");
         validOptions.put(CHECKOUT_BOOK, "Checkout Book");
         validOptions.put(RETURN_BOOK, "Return Book");
+        validOptions.put(MOVIE_LIST, "List of Movies");
 
         library = new Library();
         library.addBook(new Book("Test Driven Development", "Kent Beck", "2003"));
         library.addBook(new Book("The People Vs Tech", "Jamie Bartlett", "2018"));
         library.addBook(new Book("The Alchemist", "Paulo Coelho", "1988"));
+
+        library.addMovie(new Movie("In The Heart of The Sea","2015","Ron Howard",7));
+        library.addMovie(new Movie("Deadpool","2016","Tim Miller",7));
+        library.addMovie(new Movie("Solo: A Star Wars Story","2018","Ron Howard"));
     }
 
     public void run(){
@@ -118,6 +124,9 @@ public class MainMenu {
                 break;
             case 3:
                 System.out.println(library.returnProcess(reader));
+                break;
+            case 4:
+                System.out.println(library.getAllMovieDetailsWithColumn());
                 break;
         }
     }

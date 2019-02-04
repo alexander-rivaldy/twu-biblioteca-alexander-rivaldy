@@ -35,7 +35,7 @@ public class MainMenuTest {
     @Test
     public void printingMenu() {
         assertThat(menu.getMenuOptions(),
-                is("0. Quit\n1. List of Books\n2. Checkout Book\n3. Return Book\n"));
+                is("0. Quit\n1. List of Books\n2. Checkout Book\n3. Return Book\n4. List of Movies\n"));
     }
 
     @Test
