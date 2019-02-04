@@ -51,6 +51,8 @@ public class Library {
         String format = "";
         int counter = 1;
         for(Movie movie : movies){
+            if (!movie.isAvailable())
+                continue;
             format = String.format(" | %-2s |%-48s\n",
                     ""+ counter++,movie.getFullDetail());
             allMovies += format;
@@ -91,14 +93,27 @@ public class Library {
       * @param reader to make sure that the app only uses 1 Scanner
      * @return status of the checkout
      */
-    public String borrowProcess(Scanner reader){
+    public String borrowBookProcess(Scanner reader){
         String title = askForTitle(reader);
         try{
             findBook(title).borrow();
         }
-        //Exception could be BookCannotBeCheckedOutException or BookNotFoundException
+        //Exception could be ItemCannotBeCheckedOutException or ItemNotFoundException
         catch(Exception e){
             return "\nSorry, that book is not available\n";
+        }
+
+        return "\nThank you! Enjoy the book\n";
+    }
+
+    public String borrowMovieProcess(Scanner reader){
+        String title = askForTitle(reader);
+        try{
+            findMovie(title).borrow();
+        }
+        //Exception could be ItemCannotBeCheckedOutException or ItemNotFoundException
+        catch(Exception e){
+            return "\nSorry, that movie is not available\n";
         }
 
         return "\nThank you! Enjoy the book\n";
@@ -114,7 +129,7 @@ public class Library {
         try{
             findBook(title).returnBook();
         }
-        //Exception could be BookNotValidForReturnException or BookNotFoundException
+        //Exception could be BookNotValidForReturnException or ItemNotFoundException
         catch(Exception e){
             return "\nThat is not a valid book to return\n";
         }
@@ -137,14 +152,22 @@ public class Library {
      * certain title. If it is not found, it will throw an Exception
      * @param title title of the book to be found
      * @return the Book object
-     * @throws BookNotFoundException when book is not found
+     * @throws ItemNotFoundException when book is not found
      */
-    public Book findBook(String title) throws BookNotFoundException{
+    public Book findBook(String title) throws ItemNotFoundException {
         for(Book book : books){
             if(book.getTitle().equals(title))
                 return book;
         }
-        throw new BookNotFoundException("Book is not in the Library!");
+        throw new ItemNotFoundException("Sorry, that book is not available");
+    }
+
+    public Movie findMovie(String title) throws ItemNotFoundException {
+        for(Movie movie : movies){
+            if(movie.getTitle().equals(title))
+                return movie;
+        }
+        throw new ItemNotFoundException("Sorry, that movie is not available");
     }
 
 

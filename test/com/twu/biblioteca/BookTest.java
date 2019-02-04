@@ -1,13 +1,9 @@
 package com.twu.biblioteca;
 
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.io.ByteArrayInputStream;
-import java.util.Scanner;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -51,7 +47,7 @@ public class BookTest {
 
     @Test
     public void shouldThrowBookCannotBeCheckedOutWhenBorrowingACheckedOutBook() throws Exception {
-        failure.expect(BookCannotBeCheckedOutException.class);
+        failure.expect(ItemCannotBeCheckedOutException.class);
 
         book = new Book("Title 3", "Author 3", "2019", false);
 

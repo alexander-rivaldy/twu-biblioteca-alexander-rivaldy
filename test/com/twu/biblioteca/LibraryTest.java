@@ -71,16 +71,18 @@ public class LibraryTest {
 
     @Test
     public void shouldReturnTheCorrectBookAccordingToTitle() throws Exception{
+        Book book = new Book("Title 6", "Author 6", "2019");
+
         library.addBook(new Book("Title 5", "Author 5", "2019"));
-        library.addBook(new Book("Title 6", "Author 6", "2019"));
+        library.addBook(book);
         library.addBook(new Book("Title 7", "Author 7", "2019"));
 
-        assertThat(library.findBook("Title 6").getTitle(), is("Title 6"));
+        assertThat(library.findBook("Title 6"), is(book));
     }
 
     @Test
-    public void shouldThrowBookNotFoundExceptionWhenThereIsNoBookWithDesiredTitle() throws Exception{
-        failure.expect(BookNotFoundException.class);
+    public void shouldThrowItemNotFoundExceptionWhenThereIsNoBookWithDesiredTitle() throws Exception{
+        failure.expect(ItemNotFoundException.class);
         library.findBook("Title");
     }
 
@@ -92,7 +94,7 @@ public class LibraryTest {
         String data = "Title 9";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
 
-        library.borrowProcess(new Scanner(System.in));
+        library.borrowBookProcess(new Scanner(System.in));
 
         assertThat(wantToBorrow.isAvailable(), is(false));
 
@@ -106,7 +108,7 @@ public class LibraryTest {
         String data = "Title 10";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
 
-        library.borrowProcess(new Scanner(System.in));
+        library.borrowBookProcess(new Scanner(System.in));
 
         assertThat(wantToBorrow.isAvailable(), is(false));
 
@@ -129,7 +131,20 @@ public class LibraryTest {
         library.addMovie(new Movie("Title 2", "2002", "Director 2", 5));
         assertThat(library.getAvailableMovies(),
                 is(" | 1  | Title 1              | 2000 | Director 1      | 1       |\n" +
-                        " | 2  | Title 2              | 2002 | Director 2      | 5       |\n"));
+                   " | 2  | Title 2              | 2002 | Director 2      | 5       |\n"));
+    }
+
+    @Test
+    public void shouldPrintOnlyAvailableMovies(){
+        library.addMovie(new Movie("Title 2", "2000", "Director 2", false));
+        library.addMovie(new Movie("Title 3", "2000", "Director 3", true));
+        library.addMovie(new Movie("Title 4", "2000", "Director 4", true));
+
+        String expected =
+                " | 1  | Title 3              | 2000 | Director 3      | Unrated |\n" +
+                " | 2  | Title 4              | 2000 | Director 4      | Unrated |\n";
+
+        assertThat(library.getAvailableMovies(), is(expected));
     }
 
     @Test
@@ -143,10 +158,36 @@ public class LibraryTest {
         assertThat(library.getAllMovieDetailsWithColumn(), is(expected));
     }
 
+    @Test
+    public void shouldReturnTheCorrectMovieAccordingToTitle() throws Exception{
+        Movie movie = new Movie("Title 2", "2019", "Director 2");
 
+        library.addMovie(new Movie("Title 1", "2019", "Director 1"));
+        library.addMovie(movie);
+        library.addMovie(new Movie("Title 3", "2019", "Director 3"));
 
+        assertThat(library.findMovie("Title 2"), is(movie));
+    }
 
+    @Test
+    public void shouldThrowItemNotFoundExceptionWhenThereIsNoMovieWithDesiredTitle() throws Exception{
+        failure.expect(ItemNotFoundException.class);
+        library.findMovie("Title");
+    }
 
+    @Test
+    public void shouldGetUserInputAndCheckOutAMovieCorrectly() throws Exception{
+        Movie wantToBorrow = new Movie("Title 1", "2000", "Director 1");
+        library.addMovie(wantToBorrow);
+
+        String data = "Title 1";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+
+        library.borrowMovieProcess(new Scanner(System.in));
+
+        assertThat(wantToBorrow.isAvailable(), is(false));
+
+    }
 
 
 }

@@ -17,6 +17,7 @@ public class MainMenu {
     public static final int CHECKOUT_BOOK = 2;
     public static final int RETURN_BOOK = 3;
     public static final int MOVIE_LIST = 4;
+    public static final int CHECKOUT_MOVIE = 5;
 
     HashMap<Integer, String> validOptions;
 
@@ -38,6 +39,7 @@ public class MainMenu {
         validOptions.put(CHECKOUT_BOOK, "Checkout Book");
         validOptions.put(RETURN_BOOK, "Return Book");
         validOptions.put(MOVIE_LIST, "List of Movies");
+        validOptions.put(CHECKOUT_MOVIE, "Checkout Movie");
 
         library = new Library();
         library.addBook(new Book("Test Driven Development", "Kent Beck", "2003"));
@@ -120,7 +122,7 @@ public class MainMenu {
                 System.out.println(library.getAllBookDetailsWithColumn());
                 break;
             case 2:
-                System.out.println(library.borrowProcess(reader));
+                System.out.println(library.borrowBookProcess(reader));
                 break;
             case 3:
                 System.out.println(library.returnProcess(reader));
@@ -128,6 +130,8 @@ public class MainMenu {
             case 4:
                 System.out.println(library.getAllMovieDetailsWithColumn());
                 break;
+            case 5:
+                System.out.println(library.borrowMovieProcess(reader));
         }
     }
 

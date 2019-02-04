@@ -42,13 +42,13 @@ public class Book {
     /**
      * Function to borrow the book, changing the available boolean to false
      * or throwing an exception when it has been checked out already
-     * @throws BookCannotBeCheckedOutException when book has been checked out
+     * @throws ItemCannotBeCheckedOutException when book has been checked out
      */
-    public void borrow() throws BookCannotBeCheckedOutException {
+    public void borrow() throws ItemCannotBeCheckedOutException {
         if(available)
             available = false;
         else
-            throw new BookCannotBeCheckedOutException("Sorry, that book is not available");
+            throw new ItemCannotBeCheckedOutException("Sorry, that book is not available");
     }
 
     /**

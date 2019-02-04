@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -42,6 +41,15 @@ public class MovieTest {
     public void shouldPrintErrorMessageWhenMovieHasNoDetailsEmpty(){
         movie = new Movie("","","");
         assertThat(movie.getFullDetail(), is("Error!!! Movie has no details"));
+    }
+
+    @Test
+    public void shouldThrowBookCannotBeCheckedOutWhenBorrowingACheckedOutBook() throws Exception {
+        failure.expect(ItemCannotBeCheckedOutException.class);
+
+        movie = new Movie("Title 3", "2013", "Director 3", false);
+
+        movie.borrow();
     }
 
 

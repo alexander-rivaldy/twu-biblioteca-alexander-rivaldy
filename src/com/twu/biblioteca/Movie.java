@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
 /**
  * Created by alexa on 4/02/2019.
  */
@@ -11,6 +13,7 @@ public class Movie {
     String year;
     String director;
     int rating;
+    boolean available = true;
 
 
     public Movie(String title, String year, String director, int rating){
@@ -27,6 +30,14 @@ public class Movie {
         this.rating = UNRATED;
     }
 
+    public Movie(String title, String year, String director, boolean available){
+        this.title = title;
+        this.year = year;
+        this.director = director;
+        this.rating = UNRATED;
+        this.available = available;
+    }
+
     public String getFullDetail(){
         if((title == null && year == null && director == null && rating == UNRATED) ||
                 (title.isEmpty() && year.isEmpty() && director.isEmpty()))
@@ -40,6 +51,20 @@ public class Movie {
                 title, year, director, rating);
         return detail;
     }
+
+    public void borrow() throws ItemCannotBeCheckedOutException{
+        if(available)
+            available = false;
+        else
+            throw new ItemCannotBeCheckedOutException("That is not a valid book to return");
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public boolean isAvailable(){ return available;}
+
 
 
 
