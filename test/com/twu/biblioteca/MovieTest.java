@@ -49,7 +49,7 @@ public class MovieTest {
 
         movie = new Movie("Title 3", "2013", "Director 3", false);
 
-        movie.borrowItem();
+        movie.borrowItem(null);
     }
 
 

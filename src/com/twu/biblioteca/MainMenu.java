@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import sun.rmi.runtime.Log;
+
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Map;
@@ -13,17 +15,19 @@ import java.util.Scanner;
 public class MainMenu {
 
     public static final int EXIT = 0;
-    public static final int BOOK_LIST = 1;
-    public static final int CHECKOUT_BOOK = 2;
-    public static final int RETURN_BOOK = 3;
-    public static final int MOVIE_LIST = 4;
-    public static final int CHECKOUT_MOVIE = 5;
+    public static final int SHOW_INFO =      1;
+    public static final int BOOK_LIST =      2;
+    public static final int CHECKOUT_BOOK =  3;
+    public static final int RETURN_BOOK =    4;
+    public static final int MOVIE_LIST =     5;
+    public static final int CHECKOUT_MOVIE = 6;
+    public static final int BORROWED_BOOK =  7;
 
 
     HashMap<Integer, String> validOptions;
 
     Library library;
-
+    LoginSystem login;
     Scanner reader;
 
     public MainMenu(){
@@ -34,8 +38,14 @@ public class MainMenu {
      * Function to initialize all menu items as well as the library contents
      */
     public void initialMenu(){
+        login = new LoginSystem();
+        login.addUser(new Customer("123-4567", "Alexander Rivaldy",
+                "0410123456", "alexanderrivaldy@gmail.com", "password"));
+
+
         validOptions = new HashMap<Integer, String>();
         validOptions.put(EXIT, "Quit");
+        validOptions.put(SHOW_INFO, "Show User Info");
         validOptions.put(BOOK_LIST, "List of Books");
         validOptions.put(CHECKOUT_BOOK, "Checkout Book");
         validOptions.put(RETURN_BOOK, "Return Book");
@@ -54,7 +64,11 @@ public class MainMenu {
 
     public void run(){
         System.out.println(welcomeMessage());
+
         reader = new Scanner(System.in);
+
+        login.loginProcess(reader);
+
         while(true){
             int input = -1;
             printMenu();
@@ -119,11 +133,14 @@ public class MainMenu {
                 reader.close();
                 System.exit(1);
                 break;
+            case SHOW_INFO:
+                System.out.println(login.getActiveUser().printDetails());
+                break;
             case BOOK_LIST:
                 System.out.println(library.getAllBookDetailsWithColumn());
                 break;
             case CHECKOUT_BOOK:
-                System.out.println(library.borrowBookProcess(reader));
+                System.out.println(library.borrowBookProcess(reader, login.getActiveUser()));
                 break;
             case RETURN_BOOK:
                 System.out.println(library.returnProcess(reader));

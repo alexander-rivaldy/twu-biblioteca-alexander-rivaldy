@@ -52,7 +52,7 @@ public class Movie implements LibraryItem{
         return detail;
     }
 
-    public void borrowItem() throws ItemCannotBeCheckedOutException{
+    public void borrowItem(Customer customer) throws ItemCannotBeCheckedOutException{
         if(available)
             available = false;
         else

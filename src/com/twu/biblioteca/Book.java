@@ -9,6 +9,7 @@ public class Book implements LibraryItem{
     String author;
     String year;
     boolean available;
+    Customer borrowedBy = null;
 
     public Book(String title, String author, String year){
         this.title = title;
@@ -44,9 +45,12 @@ public class Book implements LibraryItem{
      * or throwing an exception when it has been checked out already
      * @throws ItemCannotBeCheckedOutException when book has been checked out
      */
-    public void borrowItem() throws ItemCannotBeCheckedOutException {
+    public void borrowItem(Customer customer) throws ItemCannotBeCheckedOutException {
         if(available)
+        {
             available = false;
+            setBorrowedBy(customer);
+        }
         else
             throw new ItemCannotBeCheckedOutException("Sorry, that book is not available");
     }
@@ -62,6 +66,8 @@ public class Book implements LibraryItem{
         else
             throw new ItemNotValidForReturnException("That is not a valid book to return");
     }
+
+    public void setBorrowedBy(Customer customer){ borrowedBy = customer; }
 
     public String getTitle(){ return title; }
 

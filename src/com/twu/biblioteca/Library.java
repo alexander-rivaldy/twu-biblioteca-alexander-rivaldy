@@ -61,7 +61,6 @@ public class Library {
         return allMovies;
     }
 
-
     /**
      * Adds a column on top of list of books
      * @return has the format of
@@ -93,10 +92,10 @@ public class Library {
       * @param reader to make sure that the app only uses 1 Scanner
      * @return status of the checkout
      */
-    public String borrowBookProcess(Scanner reader){
+    public String borrowBookProcess(Scanner reader, Customer customer){
         String title = askForTitle(reader);
         try{
-            findBook(title).borrowItem();
+            findBook(title).borrowItem(customer);
         }
         //Exception could be ItemCannotBeCheckedOutException or ItemNotFoundException
         catch(Exception e){
@@ -109,7 +108,8 @@ public class Library {
     public String borrowMovieProcess(Scanner reader){
         String title = askForTitle(reader);
         try{
-            findMovie(title).borrowItem();
+            //null since borrowItem in movie is not yet required
+            findMovie(title).borrowItem(null);
         }
         //Exception could be ItemCannotBeCheckedOutException or ItemNotFoundException
         catch(Exception e){

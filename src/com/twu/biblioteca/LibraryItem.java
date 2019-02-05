@@ -8,7 +8,7 @@ public interface LibraryItem {
     boolean available = true;
 
     public String getFullDetail();
-    public void borrowItem() throws ItemCannotBeCheckedOutException;
+    public void borrowItem(Customer customer) throws ItemCannotBeCheckedOutException;
     public void returnItem() throws ItemNotValidForReturnException;
     public String getTitle();
     public boolean isAvailable();

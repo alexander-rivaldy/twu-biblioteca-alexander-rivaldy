@@ -94,7 +94,7 @@ public class LibraryTest {
         String data = "Title 9";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
 
-        library.borrowBookProcess(new Scanner(System.in));
+        library.borrowBookProcess(new Scanner(System.in), null);
 
         assertThat(wantToBorrow.isAvailable(), is(false));
 
@@ -108,9 +108,16 @@ public class LibraryTest {
         String data = "Title 10";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
 
-        library.borrowBookProcess(new Scanner(System.in));
+        library.borrowBookProcess(new Scanner(System.in), null);
 
         assertThat(wantToBorrow.isAvailable(), is(false));
+
+    }
+
+    @Test
+    public void shouldShowBorrowedBookWithLibraryNumber(){
+
+
 
     }
 

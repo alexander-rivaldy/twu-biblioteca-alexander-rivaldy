@@ -16,6 +16,27 @@ public class LoginSystem {
         currentUser = null;
     }
 
+    public boolean loginProcess(Scanner reader){
+        String libNum;
+        String pass;
+        while(currentUser == null){
+            try{
+
+                System.out.println("Enter library number (xxx-xxxx): ");
+                libNum = reader.nextLine();
+                System.out.println("Enter password: ");
+                pass = reader.nextLine();
+
+                currentUser = checkCredentials(libNum,pass);
+            }
+            catch (WrongUserDetailsException e){
+                System.out.println("\n" + e.getMessage() + "\n");
+            }
+        }
+        return true;
+
+    }
+
     public void addUser(Customer customer){
         customers.add(customer);
     }
@@ -23,8 +44,9 @@ public class LoginSystem {
     public void setActiveUser(Customer user){
         currentUser = user;
     }
+    public Customer getActiveUser(){ return currentUser; }
 
-    public Customer checkCredentials(String libraryNumber, String password){
+    public Customer checkCredentials(String libraryNumber, String password) throws WrongUserDetailsException{
 
         for(Customer cust : customers){
             if(cust.getLibraryNumber().equals(libraryNumber))
@@ -32,7 +54,7 @@ public class LoginSystem {
                     return cust;
         }
 
-        return null;
+        throw new WrongUserDetailsException("Failed to login. Either the username or password is incorrect.");
     }
 
 

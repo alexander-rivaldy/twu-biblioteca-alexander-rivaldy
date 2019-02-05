@@ -51,7 +51,7 @@ public class BookTest {
 
         book = new Book("Title 3", "Author 3", "2019", false);
 
-        book.borrowItem();
+        book.borrowItem(null);
     }
 
     @Test
