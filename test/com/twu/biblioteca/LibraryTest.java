@@ -116,8 +116,22 @@ public class LibraryTest {
 
     @Test
     public void shouldShowBorrowedBookWithLibraryNumber(){
+        Book book =  new Book("Title 1", "Author 1", "2019", false);
+        Customer customer = new Customer("123-4567","name name", "phone", "email", "pass");
+        book.setBorrowedBy(customer);
 
+        Book book2 =  new Book("Title 2", "Author 2", "2019", false);
+        Customer customer2 = new Customer("123-4568","name name", "phone", "email", "pass");
+        book2.setBorrowedBy(customer2);
 
+        library.addBook(book);
+        library.addBook(book2);
+
+        String expected =
+                " | 1  | 123-4567 | Title 1              | Author 1        | 2019 |\n" +
+                " | 2  | 123-4568 | Title 2              | Author 2        | 2019 |\n";
+
+        assertThat(library.printBorrowedBooks(), is(expected));
 
     }
 

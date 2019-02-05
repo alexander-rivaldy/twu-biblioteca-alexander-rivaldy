@@ -64,6 +64,15 @@ public class BookTest {
     }
 
     @Test
+    public void shouldAddLibNumberDetailsWhenBorrowed(){
+        book = new Book("Title 1", "Author 1", "2001", false);
+        Customer customer = new Customer("123-4567", "name name", "phone", "email", "pass");
+        book.setBorrowedBy(customer);
+        assertThat(book.getFullDetail(),
+                is(" 123-4567 | Title 1              | Author 1        | 2001 |"));
+    }
+
+    @Test
     @Ignore
     public void successCheckForYear(){
 

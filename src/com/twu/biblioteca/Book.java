@@ -34,9 +34,13 @@ public class Book implements LibraryItem{
         if((title == null && author == null && year == null) ||
                 (title.isEmpty() && author.isEmpty() && year.isEmpty()))
             return "Error!!! Book has no details";
-
-        String detail = String.format(" %-20.20s | %-15.15s | %-4s |",
+        String detail;
+        if(available)
+            detail = String.format(" %-20.20s | %-15.15s | %-4s |",
                                         title, author, year);
+        else
+            detail = String.format(" %-8s | %-20.20s | %-15.15s | %-4s |",
+                                    borrowedBy.getLibraryNumber(), title, author, year);
         return detail;
     }
 

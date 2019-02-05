@@ -33,13 +33,6 @@ public class MainMenuTest {
 
 
     @Test
-    public void printingMenu() {
-        assertThat(menu.getMenuOptions(),
-                is("0. Quit\n1. List of Books\n2. Checkout Book\n3. Return Book\n4. List of Movies\n" +
-                        "5. Checkout Movie\n"));
-    }
-
-    @Test
     public void correctOption() throws Exception{
         //1 is List of Books, an option that will always be in the menu
         assertThat(menu.checkOption(1), is(true));

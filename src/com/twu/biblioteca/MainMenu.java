@@ -51,6 +51,7 @@ public class MainMenu {
         validOptions.put(RETURN_BOOK, "Return Book");
         validOptions.put(MOVIE_LIST, "List of Movies");
         validOptions.put(CHECKOUT_MOVIE, "Checkout Movie");
+        validOptions.put(BORROWED_BOOK, "List of Borrowed Books");
 
         library = new Library();
         library.addBook(new Book("Test Driven Development", "Kent Beck", "2003"));
@@ -150,6 +151,10 @@ public class MainMenu {
                 break;
             case CHECKOUT_MOVIE:
                 System.out.println(library.borrowMovieProcess(reader));
+                break;
+            case BORROWED_BOOK:
+                System.out.println(library.getBorrowedBooksWithColumn());
+                break;
         }
     }
 

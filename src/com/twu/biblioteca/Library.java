@@ -10,6 +10,7 @@ public class Library {
 
     static final int MAX_COLUMN_BOOK = 57;
     static final int MAX_COLUMN_MOVIE = 65;
+    static final int MAX_COLUMN_BORROWED_BOOK = 70;
 
     ArrayList<Book> books;
     ArrayList<Movie> movies;
@@ -61,6 +62,21 @@ public class Library {
         return allMovies;
     }
 
+    public String printBorrowedBooks(){
+        String borrowed = "";
+        String format = "";
+        int counter = 1;
+        for(Book book : books){
+            if (book.isAvailable())
+                continue;
+            format = String.format(" | %-2s |%-48s\n",
+                    ""+ counter++,book.getFullDetail());
+            borrowed += format;
+        }
+
+        return borrowed;
+    }
+
     /**
      * Adds a column on top of list of books
      * @return has the format of
@@ -84,6 +100,15 @@ public class Library {
             allMoviesWithColumn += "-";
         }
         return allMoviesWithColumn + "\n" + getAvailableMovies() ;
+    }
+
+    public String getBorrowedBooksWithColumn(){
+        String borrowedBooksWithColumn = String.format(" | %-2s | %-8s | %-20s | %-15s | %4s |\n",
+                "No", "Lib Num", "Title", "Author", "Year");
+        for(int i=0; i<MAX_COLUMN_BORROWED_BOOK; i++){
+            borrowedBooksWithColumn += "-";
+        }
+        return borrowedBooksWithColumn + "\n" + printBorrowedBooks() ;
     }
 
 
