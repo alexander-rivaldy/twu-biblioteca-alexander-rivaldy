@@ -12,6 +12,11 @@ public class Library {
     static final int MAX_COLUMN_MOVIE = 65;
     static final int MAX_COLUMN_BORROWED_BOOK = 70;
 
+    static final int BOOKS = 1;
+    static final int MOVIES = 2;
+
+    static final String BOOK = "Book";
+
     ArrayList<Book> books;
     ArrayList<Movie> movies;
 
@@ -27,40 +32,42 @@ public class Library {
 
     /**
      * Constructs a string containing information of all available books
-     * @return has the format of
+     * @return
+     *      if type is BOOKS, then the format will be
      *       | 1  | Title 3              | Author 3        | 2001 |
      *       | 2  | Title 4              | Author 4        | 2002 |
+     *      if type is MOVIES, then the format will be
+     *       | 1  | Title 1              | 2000 | Director 1      | 1       |
+     *       | 2  | Title 2              | 2002 | Director 2      | 5       |
      */
-    public String getAvailableBooks(){
-        String allBooks = "";
-        String format = "";
+
+    private String retrieveLibraryItemsInformation(ArrayList<? extends LibraryItem> items){
+
+        String details = "";
+        String format;
         int counter = 1;
-        for(Book book : books){
-            if (!book.isAvailable())
+
+        for(LibraryItem libraryItem : items){
+            if (!libraryItem.isAvailable())
                 continue;
             format = String.format(" | %-2s |%-48s\n",
-                    ""+ counter++,book.getFullDetail());
-            allBooks += format;
+                    ""+ counter++,libraryItem.getFullDetail());
+            details += format;
         }
 
-        return allBooks;
-
+        return details;
     }
 
-    public String getAvailableMovies(){
-        String allMovies = "";
-        String format = "";
-        int counter = 1;
-        for(Movie movie : movies){
-            if (!movie.isAvailable())
-                continue;
-            format = String.format(" | %-2s |%-48s\n",
-                    ""+ counter++,movie.getFullDetail());
-            allMovies += format;
+    public String getLibraryItems(int type){
+        switch(type){
+            case BOOKS:
+                return retrieveLibraryItemsInformation(books);
+            case MOVIES:
+                return retrieveLibraryItemsInformation(movies);
         }
-
-        return allMovies;
+        return "";
     }
+
 
     public String printBorrowedBooks(){
         String borrowed = "";
@@ -90,7 +97,7 @@ public class Library {
         for(int i=0; i<MAX_COLUMN_BOOK; i++){
             allBooksWithColumn += "-";
         }
-        return allBooksWithColumn + "\n" + getAvailableBooks() ;
+        return allBooksWithColumn + "\n" + getLibraryItems(BOOKS) ;
     }
 
     public String getAllMovieDetailsWithColumn(){
@@ -99,7 +106,7 @@ public class Library {
         for(int i=0; i<MAX_COLUMN_MOVIE; i++){
             allMoviesWithColumn += "-";
         }
-        return allMoviesWithColumn + "\n" + getAvailableMovies() ;
+        return allMoviesWithColumn + "\n" + getLibraryItems(MOVIES) ;
     }
 
     public String getBorrowedBooksWithColumn(){

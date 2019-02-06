@@ -8,6 +8,7 @@ import org.junit.rules.ExpectedException;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
+import static com.twu.biblioteca.Library.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -33,14 +34,14 @@ public class LibraryTest {
     @Test
     public void shouldPrintOneBookDetailsWhenThereIsOneBook(){
         library.addBook(new Book("Title 1", "Author 1", "2000"));
-        assertThat(library.getAvailableBooks(),
+        assertThat(library.getLibraryItems(BOOKS),
                 is(" | 1  | Title 1              | Author 1        | 2000 |\n"));
     }
     @Test
     public void shouldPrintBothBookDetailsWhenThereAreTwoBooks(){
         library.addBook(new Book("Title 1", "Author 1", "2000"));
         library.addBook(new Book("Title 2", "Author 2", "2002"));
-        assertThat(library.getAvailableBooks(),
+        assertThat(library.getLibraryItems(BOOKS),
                 is(" | 1  | Title 1              | Author 1        | 2000 |\n" +
                    " | 2  | Title 2              | Author 2        | 2002 |\n"));
     }
@@ -66,7 +67,7 @@ public class LibraryTest {
                 " | 1  | Title 3              | Author 3        | 2001 |\n" +
                 " | 2  | Title 4              | Author 4        | 2002 |\n";
 
-        assertThat(library.getAvailableBooks(), is(expected));
+        assertThat(library.getLibraryItems(BOOKS), is(expected));
     }
 
     @Test
@@ -142,7 +143,7 @@ public class LibraryTest {
     @Test
     public void shouldPrintOneMovieDetailsWhenThereIsOneBook(){
         library.addMovie(new Movie("Title 1", "2000", "Director 1", 10));
-        assertThat(library.getAvailableMovies(),
+        assertThat(library.getLibraryItems(MOVIES),
                 is(" | 1  | Title 1              | 2000 | Director 1      | 10      |\n"));
     }
 
@@ -150,7 +151,7 @@ public class LibraryTest {
     public void shouldPrintBothMovieDetailsWhenThereAreTwoBooks(){
         library.addMovie(new Movie("Title 1", "2000", "Director 1", 1));
         library.addMovie(new Movie("Title 2", "2002", "Director 2", 5));
-        assertThat(library.getAvailableMovies(),
+        assertThat(library.getLibraryItems(MOVIES),
                 is(" | 1  | Title 1              | 2000 | Director 1      | 1       |\n" +
                    " | 2  | Title 2              | 2002 | Director 2      | 5       |\n"));
     }
@@ -165,7 +166,7 @@ public class LibraryTest {
                 " | 1  | Title 3              | 2000 | Director 3      | Unrated |\n" +
                 " | 2  | Title 4              | 2000 | Director 4      | Unrated |\n";
 
-        assertThat(library.getAvailableMovies(), is(expected));
+        assertThat(library.getLibraryItems(MOVIES), is(expected));
     }
 
     @Test
@@ -209,6 +210,15 @@ public class LibraryTest {
         assertThat(wantToBorrow.isAvailable(), is(false));
 
     }
+
+    @Test
+    public void shouldReturnBooksUsingPolymorphism(){
+        library.addBook(new Book("Title 1", "Author 1", "2000"));
+        assertThat(library.getLibraryItems(BOOKS),
+                is(" | 1  | Title 1              | Author 1        | 2000 |\n"));
+
+    }
+
 
 
 }
