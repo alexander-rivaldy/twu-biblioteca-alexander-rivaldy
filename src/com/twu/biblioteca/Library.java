@@ -8,17 +8,17 @@ import java.util.Scanner;
  */
 public class Library {
 
-    static final int MAX_COLUMN_BOOK = 57;
-    static final int MAX_COLUMN_MOVIE = 65;
-    static final int MAX_COLUMN_BORROWED_BOOK = 70;
+    private static final int MAX_COLUMN_BOOK = 57;
+    private static final int MAX_COLUMN_MOVIE = 65;
+    private static final int MAX_COLUMN_BORROWED_BOOK = 70;
 
     static final int BOOKS = 1;
     static final int MOVIES = 2;
 
     static final String BOOK = "Book";
 
-    ArrayList<Book> books;
-    ArrayList<Movie> movies;
+    private ArrayList<Book> books;
+    private ArrayList<Movie> movies;
 
     public Library(){
         books = new ArrayList<Book>();
@@ -124,31 +124,35 @@ public class Library {
       * @param reader to make sure that the app only uses 1 Scanner
      * @return status of the checkout
      */
-    public String borrowBookProcess(Scanner reader, Customer customer){
+
+    /**
+     * function that handles all borrowing logic
+     * @param reader to make sure that the app only uses 1 Scanner
+     * @param customer to record who borrowed the library item
+     * @param type either BOOKS or MOVIES
+     * @return status of checkout
+     */
+    public String borrowProcess(Scanner reader, Customer customer, int type){
         String title = askForTitle(reader);
+        String itemType;
+
+        if(type == BOOKS)
+            itemType = "book";
+        else
+            itemType = "movie";
+
+
         try{
-            findBook(title).borrowItem(customer);
+            findItem(title, type).borrowItem(customer);
         }
         //Exception could be ItemCannotBeCheckedOutException or ItemNotFoundException
         catch(Exception e){
-            return "\nSorry, that book is not available\n";
+            return "\nSorry, that "+ itemType + " is not available\n";
         }
 
-        return "\nThank you! Enjoy the book\n";
-    }
+        return "\nThank you! Enjoy the "+ itemType + "\n";
 
-    public String borrowMovieProcess(Scanner reader){
-        String title = askForTitle(reader);
-        try{
-            //null since borrowItem in movie is not yet required
-            findMovie(title).borrowItem(null);
-        }
-        //Exception could be ItemCannotBeCheckedOutException or ItemNotFoundException
-        catch(Exception e){
-            return "\nSorry, that movie is not available\n";
-        }
 
-        return "\nThank you! Enjoy the book\n";
     }
 
     /**
@@ -201,6 +205,26 @@ public class Library {
         }
         throw new ItemNotFoundException("Sorry, that movie is not available");
     }
+
+    public LibraryItem findItem(String title, ArrayList<? extends LibraryItem> libraryItems){
+        for(LibraryItem libraryItem : libraryItems){
+            if(libraryItem.getTitle().equals(title))
+                return libraryItem;
+        }
+        return null;
+    }
+
+    public LibraryItem findItem(String title, int type){
+        switch(type){
+            case BOOKS:
+                return findItem(title, books);
+            case MOVIES:
+                return findItem(title, movies);
+        }
+        return null;
+
+    }
+
 
 
 

@@ -141,7 +141,7 @@ public class MainMenu {
                 System.out.println(library.getAllBookDetailsWithColumn());
                 break;
             case CHECKOUT_BOOK:
-                System.out.println(library.borrowBookProcess(reader, login.getActiveUser()));
+                System.out.println(library.borrowProcess(reader, login.getActiveUser(), Library.BOOKS));
                 break;
             case RETURN_BOOK:
                 System.out.println(library.returnProcess(reader));
@@ -150,7 +150,7 @@ public class MainMenu {
                 System.out.println(library.getAllMovieDetailsWithColumn());
                 break;
             case CHECKOUT_MOVIE:
-                System.out.println(library.borrowMovieProcess(reader));
+                System.out.println(library.borrowProcess(reader, null, library.MOVIES));
                 break;
             case BORROWED_BOOK:
                 System.out.println(library.getBorrowedBooksWithColumn());

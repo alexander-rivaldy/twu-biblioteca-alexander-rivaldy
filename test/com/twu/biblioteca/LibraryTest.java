@@ -78,7 +78,8 @@ public class LibraryTest {
         library.addBook(book);
         library.addBook(new Book("Title 7", "Author 7", "2019"));
 
-        assertThat(library.findBook("Title 6"), is(book));
+        assertThat(library.findItem("Title 6", BOOKS).getFullDetail(),
+                is(book.getFullDetail()));
     }
 
     @Test
@@ -95,7 +96,7 @@ public class LibraryTest {
         String data = "Title 9";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
 
-        library.borrowBookProcess(new Scanner(System.in), null);
+        library.borrowProcess(new Scanner(System.in), null, BOOKS);
 
         assertThat(wantToBorrow.isAvailable(), is(false));
 
@@ -109,7 +110,7 @@ public class LibraryTest {
         String data = "Title 10";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
 
-        library.borrowBookProcess(new Scanner(System.in), null);
+        library.borrowProcess(new Scanner(System.in), null, BOOKS);
 
         assertThat(wantToBorrow.isAvailable(), is(false));
 
@@ -188,7 +189,8 @@ public class LibraryTest {
         library.addMovie(movie);
         library.addMovie(new Movie("Title 3", "2019", "Director 3"));
 
-        assertThat(library.findMovie("Title 2"), is(movie));
+        assertThat(library.findItem("Title 2", MOVIES).getFullDetail(),
+                is(movie.getFullDetail()));
     }
 
     @Test
@@ -205,15 +207,16 @@ public class LibraryTest {
         String data = "Title 1";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
 
-        library.borrowMovieProcess(new Scanner(System.in));
+        library.borrowProcess(new Scanner(System.in), null, MOVIES);
 
         assertThat(wantToBorrow.isAvailable(), is(false));
 
     }
 
     @Test
-    public void shouldReturnBooksUsingPolymorphism(){
+    public void shouldReturnOnlyBooks(){
         library.addBook(new Book("Title 1", "Author 1", "2000"));
+        library.addMovie(new Movie("Title 3", "2003", "Director 3", 7));
         assertThat(library.getLibraryItems(BOOKS),
                 is(" | 1  | Title 1              | Author 1        | 2000 |\n"));
 
