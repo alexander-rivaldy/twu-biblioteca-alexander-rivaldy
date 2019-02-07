@@ -117,7 +117,7 @@ public class MainMenu {
      * @throws Exception will throw WrongMenuOptionException, telling the calling
      *    function that user has inputted a wrong value
      */
-    public boolean checkOption(int option) throws Exception{
+    private boolean checkOption(Integer option) throws Exception{
         if (validOptions.containsKey(option))
             return true;
         else

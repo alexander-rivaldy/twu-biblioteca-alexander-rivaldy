@@ -117,7 +117,7 @@ public class Library {
         }
         return borrowedBooksWithColumn + "\n" + printBorrowedBooks() ;
     }
-    
+
 
     /**
      * function that handles all borrowing logic

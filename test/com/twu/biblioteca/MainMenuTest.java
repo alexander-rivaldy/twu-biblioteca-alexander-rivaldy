@@ -5,8 +5,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 /**
  * Created by alexa on 1/02/2019.
@@ -14,14 +19,17 @@ import static org.junit.Assert.assertThat;
 public class MainMenuTest {
 
     MainMenu menu;
+    Method method;
+    Object actualValue;
 
     @Before
-    public void setUp(){
-        menu = new MainMenu();
-    }
+    public void setUp() throws Exception{
 
-    @Rule
-    public final ExpectedException failure = ExpectedException.none();
+        menu = new MainMenu();
+        method = MainMenu.class.getDeclaredMethod("checkOption", Integer.class);
+        method.setAccessible(true);
+
+    }
 
     /*
         ExpectedSystemExit was initially going to be used to test whether
@@ -34,21 +42,30 @@ public class MainMenuTest {
 
     @Test
     public void correctOption() throws Exception{
+        actualValue = method.invoke(menu, 1);
+
         //1 is List of Books, an option that will always be in the menu
-        assertThat(menu.checkOption(1), is(true));
+        assertThat(actualValue.toString(), is("true"));
     }
 
     @Test
     public void wrongOptionShouldThrowWrongMenuOptionException() throws Exception{
-        failure.expect(WrongMenuOptionException.class);
-        menu.checkOption(-1);
+        try {
+            method.invoke(menu, -1);
+            fail("should have thrown an exception");
+        } catch (InvocationTargetException e) {
+            assertThat(e.getCause(), instanceOf(WrongMenuOptionException.class));
+        }
     }
 
     @Test
     public void wrongOptionShouldShowAMessageToCustomer() throws Exception{
-        failure.expect(WrongMenuOptionException.class);
-        failure.expectMessage("Please select a valid option!");
-        menu.checkOption(-1);
+        try {
+            method.invoke(menu, -1);
+            fail("should have thrown an exception");
+        } catch (InvocationTargetException e) {
+            assertThat(e.getCause().getMessage(), is("Please select a valid option!"));
+        }
     }
 
 
