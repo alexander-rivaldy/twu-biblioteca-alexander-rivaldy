@@ -25,10 +25,8 @@ public class Customer {
 
     }
 
-    public boolean checkLibNumberPattern(String libraryNumber) throws WrongUserDetailsException{
-        if(!libraryNumber.matches(LIBRARY_NUMBER_PATTERN))
-            throw new WrongUserDetailsException("Wrong library number format.");
-        return true;
+    public boolean checkLibNumberPattern(String libraryNumber){
+        return libraryNumber.matches(LIBRARY_NUMBER_PATTERN);
     }
 
     public String printDetails(){

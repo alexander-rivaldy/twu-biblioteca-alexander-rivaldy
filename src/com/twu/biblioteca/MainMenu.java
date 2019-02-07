@@ -12,6 +12,11 @@ import java.util.Scanner;
 /**
  * Created by alexa on 1/02/2019.
  */
+
+
+/**
+ * WILL BE REPLACED BY A NEW MAIN MENU
+ */
 public class MainMenu {
 
     public static final int EXIT = 0;
@@ -70,20 +75,17 @@ public class MainMenu {
 
         login.loginProcess(reader);
 
-        while(true){
-            int input = -1;
+        int input = -1;
+
+        while(input != EXIT){
             printMenu();
-            try {
-                input = askForOptionInput(reader);
-                checkOption(input);
-                executeOption(input);
-            }
-            catch (InputMismatchException e){
+            input = askForOptionInput(reader);
+            if(!validOptions.containsKey(input))
+            {
                 System.out.println("Please select a valid option!");
+                continue;
             }
-            catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+            executeOption(input);
         }
     }
 
@@ -108,20 +110,6 @@ public class MainMenu {
             menu += option.getKey() + ". " + option.getValue() + "\n";
         }
         return menu;
-    }
-
-    /**
-     * Function to check whether or not the user input of option is valid
-     * @param option user input
-     * @return boolean of true
-     * @throws Exception will throw WrongMenuOptionException, telling the calling
-     *    function that user has inputted a wrong value
-     */
-    private boolean checkOption(Integer option) throws Exception{
-        if (validOptions.containsKey(option))
-            return true;
-        else
-            throw new WrongMenuOptionException("Please select a valid option!");
     }
 
     /**

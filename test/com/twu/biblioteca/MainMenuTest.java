@@ -24,8 +24,6 @@ public class MainMenuTest {
     public void setUp() throws Exception{
 
         menu = new MainMenu();
-        method = MainMenu.class.getDeclaredMethod("checkOption", Integer.class);
-        method.setAccessible(true);
 
     }
 
@@ -37,34 +35,25 @@ public class MainMenuTest {
 //    @Rule
 //    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
-
     @Test
-    public void correctOption() throws Exception{
-        actualValue = method.invoke(menu, 1);
+    public void correctMenuOptionsPrinted() throws Exception{
+        method = MainMenu.class.getDeclaredMethod("getMenuOptions");
+        method.setAccessible(true);
+        actualValue = method.invoke(menu);
 
-        //1 is List of Books, an option that will always be in the menu
-        assertThat(actualValue.toString(), is("true"));
+        String expected = "" +
+                "0. Quit\n" +
+                "1. Show User Info\n" +
+                "2. List of Books\n" +
+                "3. Checkout Book\n" +
+                "4. Return Book\n" +
+                "5. List of Movies\n" +
+                "6. Checkout Movie\n" +
+                "7. List of Borrowed Books\n";
+
+        assertThat(actualValue.toString(), is(expected));
     }
 
-    @Test
-    public void wrongOptionShouldThrowWrongMenuOptionException() throws Exception{
-        try {
-            method.invoke(menu, -1);
-            fail("should have thrown an exception");
-        } catch (InvocationTargetException e) {
-            assertThat(e.getCause(), instanceOf(WrongMenuOptionException.class));
-        }
-    }
-
-    @Test
-    public void wrongOptionShouldShowAMessageToCustomer() throws Exception{
-        try {
-            method.invoke(menu, -1);
-            fail("should have thrown an exception");
-        } catch (InvocationTargetException e) {
-            assertThat(e.getCause().getMessage(), is("Please select a valid option!"));
-        }
-    }
 
 
 

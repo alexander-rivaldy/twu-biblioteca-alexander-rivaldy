@@ -11,6 +11,7 @@ import java.lang.reflect.Method;
 import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -48,18 +49,9 @@ public class LoginSystemTest {
     }
 
     @Test
-    public void unsuccessfulCheckCredentialsShouldThrowWrongUserDetailsException() {
-        try{
-            method.invoke(login, "","");
-            fail("should have thrown a WrongUserDetailsException");
-        }
-        catch(InvocationTargetException e){
-            assertThat(e.getCause(), instanceOf(WrongUserDetailsException.class));
-
-        }
-        catch(Exception e){
-            fail("Wrong exception thrown");
-        }
+    public void unsuccessfulCheckCredentialsShouldReturnNull() throws Exception {
+        actualValue = method.invoke(login, "","");
+        assertThat(actualValue, is(nullValue()));
 
     }
 

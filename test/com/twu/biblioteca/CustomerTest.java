@@ -34,11 +34,10 @@ public class CustomerTest {
 
     @Test
     public void shouldThrowWrongUserDetailsExceptionWithLibNumberError() throws Exception{
-        failure.expect(WrongUserDetailsException.class);
-        failure.expectMessage("Wrong library number format.");
+
         cust = new Customer();
 
-        cust.checkLibNumberPattern("123-123");
+        assertThat(cust.checkLibNumberPattern("123-123"), is(false));
 
     }
 
