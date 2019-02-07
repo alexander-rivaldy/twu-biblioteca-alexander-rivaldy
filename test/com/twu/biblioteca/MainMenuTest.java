@@ -21,7 +21,7 @@ public class MainMenuTest {
     Object actualValue;
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp() throws Exception {
 
         menu = new MainMenu();
 
@@ -36,7 +36,7 @@ public class MainMenuTest {
 //    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
     @Test
-    public void correctMenuOptionsPrinted() throws Exception{
+    public void correctMenuOptionsPrinted() throws Exception {
         method = MainMenu.class.getDeclaredMethod("getMenuOptions");
         method.setAccessible(true);
         actualValue = method.invoke(menu);
@@ -53,11 +53,6 @@ public class MainMenuTest {
 
         assertThat(actualValue.toString(), is(expected));
     }
-
-
-
-
-
 
 
 }

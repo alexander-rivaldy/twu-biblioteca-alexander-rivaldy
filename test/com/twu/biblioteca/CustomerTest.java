@@ -19,8 +19,8 @@ public class CustomerTest {
 
 
     @Test
-    public void shouldPrintCustomerDetailsCorrectly(){
-        cust = new Customer("123-1234","name","0410123456", "test@email.com", "");
+    public void shouldPrintCustomerDetailsCorrectly() {
+        cust = new Customer("123-1234", "name", "0410123456", "test@email.com", "");
         String expected =
                 "\n" +
                 "Library Number: 123-1234\n" +
@@ -33,7 +33,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void shouldThrowWrongUserDetailsExceptionWithLibNumberError() throws Exception{
+    public void shouldThrowWrongUserDetailsExceptionWithLibNumberError() throws Exception {
 
         cust = new Customer();
 

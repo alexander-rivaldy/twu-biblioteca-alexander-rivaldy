@@ -20,7 +20,7 @@ public class Library {
     private ArrayList<Book> books;
     private ArrayList<Movie> movies;
 
-    public Library(){
+    public Library() {
         books = new ArrayList<Book>();
         movies = new ArrayList<Movie>();
     }
@@ -41,13 +41,13 @@ public class Library {
      *       | 2  | Title 2              | 2002 | Director 2      | 5       |
      */
 
-    private String retrieveLibraryItemsInformation(ArrayList<? extends LibraryItem> items){
+    private String retrieveLibraryItemsInformation(ArrayList<? extends LibraryItem> items) {
 
         String details = "";
         String format;
         int counter = 1;
 
-        for(LibraryItem libraryItem : items){
+        for(LibraryItem libraryItem : items) {
             if (!libraryItem.isAvailable())
                 continue;
             format = String.format(" | %-2s |%-48s\n",
@@ -58,7 +58,7 @@ public class Library {
         return details;
     }
 
-    public String getLibraryItems(int type){
+    public String getLibraryItems(int type) {
         switch(type){
             case BOOKS:
                 return retrieveLibraryItemsInformation(books);
@@ -91,13 +91,13 @@ public class Library {
      *   ---------------------------------------------------------
      *       followed by the list of books
      */
-    public String getAllBookDetailsWithColumn(){
+    public String getAllBookDetailsWithColumn() {
         String allBooksWithColumn = String.format(" | %-2s | %-20s | %-15s | %4s |\n",
                 "No", "Title", "Author", "Year");
-        for(int i=0; i<MAX_COLUMN_BOOK; i++){
+        for (int i = 0; i < MAX_COLUMN_BOOK; i++) {
             allBooksWithColumn += "-";
         }
-        return allBooksWithColumn + "\n" + getLibraryItems(BOOKS) ;
+        return allBooksWithColumn + "\n" + getLibraryItems(BOOKS);
     }
 
     public String getAllMovieDetailsWithColumn(){
@@ -139,7 +139,7 @@ public class Library {
         try{
             findItem(title, type).borrowItem(customer);
         }
-        //Exception could be ItemCannotBeCheckedOutException or ItemNotFoundException
+        //Exception could be ItemCannotBeCheckedOutException
         catch(Exception e){
             return "\nSorry, that "+ itemType + " is not available\n";
         }
@@ -159,7 +159,7 @@ public class Library {
         try{
             findItem(title, BOOKS).returnItem();
         }
-        //Exception could be ItemNotValidForReturnException or ItemNotFoundException
+        //Exception could be ItemNotValidForReturnException
         catch(Exception e){
             return "\nThat is not a valid book to return\n";
         }

@@ -24,7 +24,7 @@ public class LibraryTest {
     public final ExpectedException failure = ExpectedException.none();
 
     @Before
-    public void setUp(){
+    public void setUp() {
         library = new Library();
     }
 
@@ -33,22 +33,23 @@ public class LibraryTest {
      */
 
     @Test
-    public void shouldPrintOneBookDetailsWhenThereIsOneBook(){
+    public void shouldPrintOneBookDetailsWhenThereIsOneBook() {
         library.addBook(new Book("Title 1", "Author 1", "2000"));
         assertThat(library.getLibraryItems(BOOKS),
                 is(" | 1  | Title 1              | Author 1        | 2000 |\n"));
     }
+
     @Test
-    public void shouldPrintBothBookDetailsWhenThereAreTwoBooks(){
+    public void shouldPrintBothBookDetailsWhenThereAreTwoBooks() {
         library.addBook(new Book("Title 1", "Author 1", "2000"));
         library.addBook(new Book("Title 2", "Author 2", "2002"));
         assertThat(library.getLibraryItems(BOOKS),
                 is(" | 1  | Title 1              | Author 1        | 2000 |\n" +
-                   " | 2  | Title 2              | Author 2        | 2002 |\n"));
+                    " | 2  | Title 2              | Author 2        | 2002 |\n"));
     }
 
     @Test
-    public void shouldPrintBookDetailsWithColumns(){
+    public void shouldPrintBookDetailsWithColumns() {
         library.addBook(new Book("Title 3", "Author 3", "2019"));
         //60
         String expected =
@@ -59,10 +60,10 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldPrintOnlyAvailableBooks(){
-        library.addBook(new Book("Title 2", "Author 2", "2000", false)) ;
-        library.addBook(new Book("Title 3", "Author 3", "2001", true)) ;
-        library.addBook(new Book("Title 4", "Author 4", "2002", true)) ;
+    public void shouldPrintOnlyAvailableBooks() {
+        library.addBook(new Book("Title 2", "Author 2", "2000", false));
+        library.addBook(new Book("Title 3", "Author 3", "2001", true));
+        library.addBook(new Book("Title 4", "Author 4", "2002", true));
 
         String expected =
                 " | 1  | Title 3              | Author 3        | 2001 |\n" +
@@ -72,7 +73,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldReturnTheCorrectBookAccordingToTitle(){
+    public void shouldReturnTheCorrectBookAccordingToTitle() {
         Book book = new Book("Title 6", "Author 6", "2019");
 
         library.addBook(new Book("Title 5", "Author 5", "2019"));
@@ -84,12 +85,12 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldReturnNullWhenThereIsNoBookWithDesiredTitle(){
+    public void shouldReturnNullWhenThereIsNoBookWithDesiredTitle() {
         assertThat(library.findItem("", BOOKS), is(nullValue()));
     }
 
     @Test
-    public void shouldGetUserInputAndCheckOutABookCorrectly(){
+    public void shouldGetUserInputAndCheckOutABookCorrectly() {
         Book wantToBorrow = new Book("Title 9", "Author 9", "2019");
         library.addBook(wantToBorrow);
 
@@ -103,7 +104,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldGetUserInputAndReturnABookCorrectly(){
+    public void shouldGetUserInputAndReturnABookCorrectly() {
         Book wantToBorrow = new Book("Title 10", "Author 9", "2019", false);
         library.addBook(wantToBorrow);
 
@@ -117,13 +118,13 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldShowBorrowedBookWithLibraryNumber(){
-        Book book =  new Book("Title 1", "Author 1", "2019", false);
-        Customer customer = new Customer("123-4567","name name", "phone", "email", "pass");
+    public void shouldShowBorrowedBookWithLibraryNumber() {
+        Book book = new Book("Title 1", "Author 1", "2019", false);
+        Customer customer = new Customer("123-4567", "name name", "phone", "email", "pass");
         book.setBorrowedBy(customer);
 
-        Book book2 =  new Book("Title 2", "Author 2", "2019", false);
-        Customer customer2 = new Customer("123-4568","name name", "phone", "email", "pass");
+        Book book2 = new Book("Title 2", "Author 2", "2019", false);
+        Customer customer2 = new Customer("123-4568", "name name", "phone", "email", "pass");
         book2.setBorrowedBy(customer2);
 
         library.addBook(book);
@@ -142,23 +143,23 @@ public class LibraryTest {
      */
 
     @Test
-    public void shouldPrintOneMovieDetailsWhenThereIsOneBook(){
+    public void shouldPrintOneMovieDetailsWhenThereIsOneBook() {
         library.addMovie(new Movie("Title 1", "2000", "Director 1", 10));
         assertThat(library.getLibraryItems(MOVIES),
                 is(" | 1  | Title 1              | 2000 | Director 1      | 10      |\n"));
     }
 
     @Test
-    public void shouldPrintBothMovieDetailsWhenThereAreTwoBooks(){
+    public void shouldPrintBothMovieDetailsWhenThereAreTwoBooks() {
         library.addMovie(new Movie("Title 1", "2000", "Director 1", 1));
         library.addMovie(new Movie("Title 2", "2002", "Director 2", 5));
         assertThat(library.getLibraryItems(MOVIES),
                 is(" | 1  | Title 1              | 2000 | Director 1      | 1       |\n" +
-                   " | 2  | Title 2              | 2002 | Director 2      | 5       |\n"));
+                    " | 2  | Title 2              | 2002 | Director 2      | 5       |\n"));
     }
 
     @Test
-    public void shouldPrintOnlyAvailableMovies(){
+    public void shouldPrintOnlyAvailableMovies() {
         library.addMovie(new Movie("Title 2", "2000", "Director 2", false));
         library.addMovie(new Movie("Title 3", "2000", "Director 3", true));
         library.addMovie(new Movie("Title 4", "2000", "Director 4", true));
@@ -171,7 +172,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldPrintMovieDetailsWithColumns(){
+    public void shouldPrintMovieDetailsWithColumns() {
         library.addMovie(new Movie("Title 3", "2003", "Director 3", 7));
         //65
         String expected =
@@ -196,11 +197,11 @@ public class LibraryTest {
     @Test
     public void shouldReturnNullWhenThereIsNoMovieWithDesiredTitle() {
 
-        assertThat(library.findItem("",MOVIES), is(nullValue()));
+        assertThat(library.findItem("", MOVIES), is(nullValue()));
     }
 
     @Test
-    public void shouldGetUserInputAndCheckOutAMovieCorrectly(){
+    public void shouldGetUserInputAndCheckOutAMovieCorrectly() {
         Movie wantToBorrow = new Movie("Title 1", "2000", "Director 1");
         library.addMovie(wantToBorrow);
 
@@ -214,14 +215,13 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldReturnOnlyBooks(){
+    public void shouldReturnOnlyBooks() {
         library.addBook(new Book("Title 1", "Author 1", "2000"));
         library.addMovie(new Movie("Title 3", "2003", "Director 3", 7));
         assertThat(library.getLibraryItems(BOOKS),
                 is(" | 1  | Title 1              | Author 1        | 2000 |\n"));
 
     }
-
 
 
 }

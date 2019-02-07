@@ -26,15 +26,15 @@ public class LoginSystemTest {
     public final ExpectedException failure = ExpectedException.none();
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp() throws Exception {
         login = new LoginSystem();
         method = LoginSystem.class.getDeclaredMethod("checkCredentials", String.class, String.class);
         method.setAccessible(true);
     }
 
     @Test
-    public void successfulCheckCredentials() throws Exception{
-        Customer cust = new Customer("123-4567","name", "0410123456", "test@email.com", "pass");
+    public void successfulCheckCredentials() throws Exception {
+        Customer cust = new Customer("123-4567", "name", "0410123456", "test@email.com", "pass");
 
         login.addUser(cust);
 
@@ -47,7 +47,7 @@ public class LoginSystemTest {
 
     @Test
     public void unsuccessfulCheckCredentialsShouldReturnNull() throws Exception {
-        actualValue = method.invoke(login, "","");
+        actualValue = method.invoke(login, "", "");
         assertThat(actualValue, is(nullValue()));
 
     }
@@ -55,8 +55,8 @@ public class LoginSystemTest {
 
     //unsuccessful login will loop till there is a right combination input
     @Test
-    public void successfulLoginProcessShouldReturnTrue(){
-        Customer cust = new Customer("123-4567","name", "0410123456", "test@email.com", "pass");
+    public void successfulLoginProcessShouldReturnTrue() {
+        Customer cust = new Customer("123-4567", "name", "0410123456", "test@email.com", "pass");
 
         login.addUser(cust);
 
@@ -66,7 +66,6 @@ public class LoginSystemTest {
         assertThat(login.loginProcess(new Scanner(System.in)), is(true));
 
     }
-
 
 
 }

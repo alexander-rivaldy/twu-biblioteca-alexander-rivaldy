@@ -1,12 +1,8 @@
 package com.twu.biblioteca;
 
-import sun.rmi.runtime.Log;
-
 import java.util.HashMap;
-import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
-
 
 
 /**
@@ -20,13 +16,13 @@ import java.util.Scanner;
 public class MainMenu {
 
     public static final int EXIT = 0;
-    public static final int SHOW_INFO =      1;
-    public static final int BOOK_LIST =      2;
-    public static final int CHECKOUT_BOOK =  3;
-    public static final int RETURN_BOOK =    4;
-    public static final int MOVIE_LIST =     5;
+    public static final int SHOW_INFO = 1;
+    public static final int BOOK_LIST = 2;
+    public static final int CHECKOUT_BOOK = 3;
+    public static final int RETURN_BOOK = 4;
+    public static final int MOVIE_LIST = 5;
     public static final int CHECKOUT_MOVIE = 6;
-    public static final int BORROWED_BOOK =  7;
+    public static final int BORROWED_BOOK = 7;
 
 
     HashMap<Integer, String> validOptions;
@@ -35,14 +31,14 @@ public class MainMenu {
     LoginSystem login;
     Scanner reader;
 
-    public MainMenu(){
+    public MainMenu() {
         initialMenu();
     }
 
     /**
      * Function to initialize all menu items as well as the library contents
      */
-    private void initialMenu(){
+    private void initialMenu() {
         login = new LoginSystem();
         login.addUser(new Customer("123-4567", "Alexander Rivaldy",
                 "0410123456", "alexanderrivaldy@gmail.com", "password"));
@@ -63,12 +59,12 @@ public class MainMenu {
         library.addBook(new Book("The People Vs Tech", "Jamie Bartlett", "2018"));
         library.addBook(new Book("The Alchemist", "Paulo Coelho", "1988"));
 
-        library.addMovie(new Movie("In The Heart of The Sea","2015","Ron Howard",7));
-        library.addMovie(new Movie("Deadpool","2016","Tim Miller",7));
-        library.addMovie(new Movie("Solo: A Star Wars Story","2018","Ron Howard"));
+        library.addMovie(new Movie("In The Heart of The Sea", "2015", "Ron Howard", 7));
+        library.addMovie(new Movie("Deadpool", "2016", "Tim Miller", 7));
+        library.addMovie(new Movie("Solo: A Star Wars Story", "2018", "Ron Howard"));
     }
 
-    public void run(){
+    public void run() {
         System.out.println(welcomeMessage());
 
         reader = new Scanner(System.in);
@@ -77,11 +73,10 @@ public class MainMenu {
 
         int input = -1;
 
-        while(input != EXIT){
+        while (input != EXIT) {
             printMenu();
             input = askForOptionInput(reader);
-            if(!validOptions.containsKey(input))
-            {
+            if (!validOptions.containsKey(input)) {
                 System.out.println("Please select a valid option!");
                 continue;
             }
@@ -92,21 +87,22 @@ public class MainMenu {
     /**
      * Function to print the menu options
      */
-    private void printMenu(){
+    private void printMenu() {
         System.out.println("\nChoose an option from the list below: \n");
         System.out.println(getMenuOptions());
     }
 
     /**
      * Construct a String of all available menu options
+     *
      * @return has the format of
-     *  0. Quit
-     *  1. List of Books
+     * 0. Quit
+     * 1. List of Books
      * and so on
      */
-    private String getMenuOptions(){
+    private String getMenuOptions() {
         String menu = "";
-        for(Map.Entry<Integer,String> option : validOptions.entrySet()){
+        for (Map.Entry<Integer, String> option : validOptions.entrySet()) {
             menu += option.getKey() + ". " + option.getValue() + "\n";
         }
         return menu;
@@ -114,10 +110,11 @@ public class MainMenu {
 
     /**
      * Function to execute the option entered by the user accordingly
+     *
      * @param option user input of option
      */
     private void executeOption(int option) {
-        switch(option){
+        switch (option) {
             case EXIT:
                 reader.close();
                 System.exit(1);
@@ -148,29 +145,27 @@ public class MainMenu {
 
     /**
      * Prompt user to input which option they want to execute
+     *
      * @param reader to make sure that the app only uses 1 Scanner
-     * @return
-     *     -1 if the value entered is not valid
-     *     otherwise, it will pass on the user input
+     * @return -1 if the value entered is not valid
+     * otherwise, it will pass on the user input
      */
-    private int askForOptionInput(Scanner reader){
+    private int askForOptionInput(Scanner reader) {
         System.out.print("\nEnter your desired option: ");
         String input = reader.nextLine();
         int option = -1;
-        try{
+        try {
             option = Integer.parseInt(input);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             //entered value is not an integer and will be handled
             //in calling function
         }
         return option;
     }
 
-    private String welcomeMessage(){
+    private String welcomeMessage() {
         return "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
     }
-
 
 
 }

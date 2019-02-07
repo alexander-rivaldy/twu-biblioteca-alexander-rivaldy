@@ -13,9 +13,10 @@ public class Customer {
     String email;
     String password;
 
-    public Customer(){};
+    public Customer() {
+    }
 
-    public Customer(String libraryNumber, String name, String phone, String email, String password){
+    public Customer(String libraryNumber, String name, String phone, String email, String password) {
 
         this.libraryNumber = libraryNumber;
         this.name = name;
@@ -25,23 +26,28 @@ public class Customer {
 
     }
 
-    public boolean checkLibNumberPattern(String libraryNumber){
+    public boolean checkLibNumberPattern(String libraryNumber) {
         return libraryNumber.matches(LIBRARY_NUMBER_PATTERN);
     }
 
-    public String printDetails(){
+    public String printDetails() {
         String details =
                 "\n" +
                 "Library Number: " + libraryNumber + "\n" +
                 "Name: " + name + "\n" +
                 "Phone: " + phone + "\n" +
                 "Email: " + email + "\n" +
-                "\n" ;
+                "\n";
 
         return details;
     }
 
-    public String getLibraryNumber(){ return libraryNumber; }
-    public String getPassword(){ return password; }
+    public String getLibraryNumber() {
+        return libraryNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 
 }

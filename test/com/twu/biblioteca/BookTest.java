@@ -19,27 +19,27 @@ public class BookTest {
     public final ExpectedException failure = ExpectedException.none();
 
     @Test
-    public void shouldPrintAllDetailsOfABook(){
+    public void shouldPrintAllDetailsOfABook() {
         book = new Book("Title 1", "Author 1", "2001");
         assertThat(book.getFullDetail(),
                 is(" Title 1              | Author 1        | 2001 |"));
     }
 
     @Test
-    public void shouldPrintErrorMessageWhenBookHasNoDetailsNull(){
-        book = new Book(null,null,null);
+    public void shouldPrintErrorMessageWhenBookHasNoDetailsNull() {
+        book = new Book(null, null, null);
         assertThat(book.getFullDetail(), is("Error!!! Book has no details"));
     }
 
     @Test
-    public void shouldPrintErrorMessageWhenBookHasNoDetailsEmpty(){
-        book = new Book("","","");
+    public void shouldPrintErrorMessageWhenBookHasNoDetailsEmpty() {
+        book = new Book("", "", "");
         assertThat(book.getFullDetail(), is("Error!!! Book has no details"));
     }
 
     @Test
     @Ignore
-    public void shouldPrintUnknownWhenDetailIsNotComplete(){
+    public void shouldPrintUnknownWhenDetailIsNotComplete() {
         book = new Book("Title 2", null, "2000");
         assertThat(book.getFullDetail(),
                 is(" Title 2              | Unknown         | 2000 |"));
@@ -55,7 +55,7 @@ public class BookTest {
     }
 
     @Test
-    public void shouldThrowBookNotValidForReturnExceptionWhenReturningAnAvailableBook() throws Exception{
+    public void shouldThrowBookNotValidForReturnExceptionWhenReturningAnAvailableBook() throws Exception {
         failure.expect(ItemNotValidForReturnException.class);
 
         book = new Book("Title 4", null, null, true);
@@ -64,7 +64,7 @@ public class BookTest {
     }
 
     @Test
-    public void shouldAddLibNumberDetailsWhenBorrowed(){
+    public void shouldAddLibNumberDetailsWhenBorrowed() {
         book = new Book("Title 1", "Author 1", "2001", false);
         Customer customer = new Customer("123-4567", "name name", "phone", "email", "pass");
         book.setBorrowedBy(customer);
@@ -74,13 +74,13 @@ public class BookTest {
 
     @Test
     @Ignore
-    public void successCheckForYear(){
+    public void successCheckForYear() {
 
     }
 
     @Test
     @Ignore
-    public void failedCheckForYear(){
+    public void failedCheckForYear() {
 
     }
 

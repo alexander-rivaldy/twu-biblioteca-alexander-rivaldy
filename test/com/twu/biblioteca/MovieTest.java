@@ -18,28 +18,28 @@ public class MovieTest {
     public final ExpectedException failure = ExpectedException.none();
 
     @Test
-    public void shouldPrintAllDetailsOfAMovie(){
+    public void shouldPrintAllDetailsOfAMovie() {
         movie = new Movie("Title 1", "2001", "Director 1", 10);
         assertThat(movie.getFullDetail(),
                 is(" Title 1              | 2001 | Director 1      | 10      |"));
     }
 
     @Test
-    public void shouldPrintUnratedWhenMovieHasntBeenRated(){
+    public void shouldPrintUnratedWhenMovieHasntBeenRated() {
         movie = new Movie("Title 1", "2001", "Director 1");
         assertThat(movie.getFullDetail(),
                 is(" Title 1              | 2001 | Director 1      | Unrated |"));
     }
 
     @Test
-    public void shouldPrintErrorMessageWhenMovieHasNoDetailsNull(){
-        movie = new Movie(null,null,null);
+    public void shouldPrintErrorMessageWhenMovieHasNoDetailsNull() {
+        movie = new Movie(null, null, null);
         assertThat(movie.getFullDetail(), is("Error!!! Movie has no details"));
     }
 
     @Test
-    public void shouldPrintErrorMessageWhenMovieHasNoDetailsEmpty(){
-        movie = new Movie("","","");
+    public void shouldPrintErrorMessageWhenMovieHasNoDetailsEmpty() {
+        movie = new Movie("", "", "");
         assertThat(movie.getFullDetail(), is("Error!!! Movie has no details"));
     }
 
@@ -51,9 +51,6 @@ public class MovieTest {
 
         movie.borrowItem(null);
     }
-
-
-
 
 
 }
