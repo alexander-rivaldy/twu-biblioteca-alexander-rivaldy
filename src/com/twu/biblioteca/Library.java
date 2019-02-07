@@ -117,13 +117,7 @@ public class Library {
         }
         return borrowedBooksWithColumn + "\n" + printBorrowedBooks() ;
     }
-
-
-    /**
-     * function that handles all borrowing logic
-      * @param reader to make sure that the app only uses 1 Scanner
-     * @return status of the checkout
-     */
+    
 
     /**
      * function that handles all borrowing logic
@@ -163,7 +157,7 @@ public class Library {
     public String returnProcess(Scanner reader){
         String title = askForTitle(reader);
         try{
-            findBook(title).returnItem();
+            findItem(title, BOOKS).returnItem();
         }
         //Exception could be ItemNotValidForReturnException or ItemNotFoundException
         catch(Exception e){
@@ -184,28 +178,13 @@ public class Library {
     }
 
     /**
-     * Function to iterate through the Book ArrayList and find a book with
-     * certain title. If it is not found, it will throw an Exception
-     * @param title title of the book to be found
-     * @return the Book object
-     * @throws ItemNotFoundException when book is not found
+     * Function to find a specific library item with title.
+     * It will iterate through either books or movies, depending on the
+     * parameter type
+     * @param title title of book or movie to be found
+     * @param libraryItems which ArrayList wants to be iterated through
+     * @return a LibraryItem or null if not found
      */
-    public Book findBook(String title) throws ItemNotFoundException {
-        for(Book book : books){
-            if(book.getTitle().equals(title))
-                return book;
-        }
-        throw new ItemNotFoundException("Sorry, that book is not available");
-    }
-
-    public Movie findMovie(String title) throws ItemNotFoundException {
-        for(Movie movie : movies){
-            if(movie.getTitle().equals(title))
-                return movie;
-        }
-        throw new ItemNotFoundException("Sorry, that movie is not available");
-    }
-
     public LibraryItem findItem(String title, ArrayList<? extends LibraryItem> libraryItems){
         for(LibraryItem libraryItem : libraryItems){
             if(libraryItem.getTitle().equals(title))

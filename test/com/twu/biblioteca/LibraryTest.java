@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import static com.twu.biblioteca.Library.*;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -71,7 +72,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldReturnTheCorrectBookAccordingToTitle() throws Exception{
+    public void shouldReturnTheCorrectBookAccordingToTitle(){
         Book book = new Book("Title 6", "Author 6", "2019");
 
         library.addBook(new Book("Title 5", "Author 5", "2019"));
@@ -83,13 +84,12 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldThrowItemNotFoundExceptionWhenThereIsNoBookWithDesiredTitle() throws Exception{
-        failure.expect(ItemNotFoundException.class);
-        library.findBook("Title");
+    public void shouldReturnNullWhenThereIsNoBookWithDesiredTitle(){
+        assertThat(library.findItem("", BOOKS), is(nullValue()));
     }
 
     @Test
-    public void shouldGetUserInputAndCheckOutABookCorrectly() throws Exception{
+    public void shouldGetUserInputAndCheckOutABookCorrectly(){
         Book wantToBorrow = new Book("Title 9", "Author 9", "2019");
         library.addBook(wantToBorrow);
 
@@ -103,7 +103,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldGetUserInputAndReturnABookCorrectly() throws Exception{
+    public void shouldGetUserInputAndReturnABookCorrectly(){
         Book wantToBorrow = new Book("Title 10", "Author 9", "2019", false);
         library.addBook(wantToBorrow);
 
@@ -182,7 +182,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldReturnTheCorrectMovieAccordingToTitle() throws Exception{
+    public void shouldReturnTheCorrectMovieAccordingToTitle() {
         Movie movie = new Movie("Title 2", "2019", "Director 2");
 
         library.addMovie(new Movie("Title 1", "2019", "Director 1"));
@@ -194,13 +194,13 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldThrowItemNotFoundExceptionWhenThereIsNoMovieWithDesiredTitle() throws Exception{
-        failure.expect(ItemNotFoundException.class);
-        library.findMovie("Title");
+    public void shouldReturnNullWhenThereIsNoMovieWithDesiredTitle() {
+
+        assertThat(library.findItem("",MOVIES), is(nullValue()));
     }
 
     @Test
-    public void shouldGetUserInputAndCheckOutAMovieCorrectly() throws Exception{
+    public void shouldGetUserInputAndCheckOutAMovieCorrectly(){
         Movie wantToBorrow = new Movie("Title 1", "2000", "Director 1");
         library.addMovie(wantToBorrow);
 
