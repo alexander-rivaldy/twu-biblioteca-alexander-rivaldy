@@ -37,7 +37,7 @@ public class MainMenu {
     /**
      * Function to initialize all menu items as well as the library contents
      */
-    public void initialMenu(){
+    private void initialMenu(){
         login = new LoginSystem();
         login.addUser(new Customer("123-4567", "Alexander Rivaldy",
                 "0410123456", "alexanderrivaldy@gmail.com", "password"));
@@ -90,7 +90,7 @@ public class MainMenu {
     /**
      * Function to print the menu options
      */
-    public void printMenu(){
+    private void printMenu(){
         System.out.println("\nChoose an option from the list below: \n");
         System.out.println(getMenuOptions());
     }
@@ -102,7 +102,7 @@ public class MainMenu {
      *  1. List of Books
      * and so on
      */
-    public String getMenuOptions(){
+    private String getMenuOptions(){
         String menu = "";
         for(Map.Entry<Integer,String> option : validOptions.entrySet()){
             menu += option.getKey() + ". " + option.getValue() + "\n";
@@ -128,7 +128,7 @@ public class MainMenu {
      * Function to execute the option entered by the user accordingly
      * @param option user input of option
      */
-    public void executeOption(int option) {
+    private void executeOption(int option) {
         switch(option){
             case EXIT:
                 reader.close();
@@ -165,7 +165,7 @@ public class MainMenu {
      *     -1 if the value entered is not valid
      *     otherwise, it will pass on the user input
      */
-    public int askForOptionInput(Scanner reader){
+    private int askForOptionInput(Scanner reader){
         System.out.print("\nEnter your desired option: ");
         String input = reader.nextLine();
         int option = -1;
@@ -179,7 +179,7 @@ public class MainMenu {
         return option;
     }
 
-    public String welcomeMessage(){
+    private String welcomeMessage(){
         return "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
     }
 

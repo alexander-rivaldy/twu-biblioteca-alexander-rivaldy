@@ -41,12 +41,9 @@ public class LoginSystem {
         customers.add(customer);
     }
 
-    public void setActiveUser(Customer user){
-        currentUser = user;
-    }
     public Customer getActiveUser(){ return currentUser; }
 
-    public Customer checkCredentials(String libraryNumber, String password) throws WrongUserDetailsException{
+    private Customer checkCredentials(String libraryNumber, String password) throws WrongUserDetailsException{
 
         for(Customer cust : customers){
             if(cust.getLibraryNumber().equals(libraryNumber))

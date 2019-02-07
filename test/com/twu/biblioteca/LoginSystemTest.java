@@ -6,10 +6,14 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.ByteArrayInputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Scanner;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 /**
  * Created by alexa on 4/02/2019.
@@ -17,13 +21,17 @@ import static org.junit.Assert.assertThat;
 public class LoginSystemTest {
 
     LoginSystem login;
+    Method method;
+    Object actualValue;
 
     @Rule
     public final ExpectedException failure = ExpectedException.none();
 
     @Before
-    public void setUp(){
+    public void setUp() throws Exception{
         login = new LoginSystem();
+        method = LoginSystem.class.getDeclaredMethod("checkCredentials", String.class, String.class);
+        method.setAccessible(true);
     }
 
     @Test
@@ -32,16 +40,27 @@ public class LoginSystemTest {
 
         login.addUser(cust);
 
-        assertThat(login.checkCredentials("123-4567", "pass"), is(cust));
+        actualValue = method.invoke(login, "123-4567", "pass");
+
+        assertThat(actualValue.toString(), is(cust.toString()));
 
 
     }
 
     @Test
-    public void unsuccessfulCheckCredentialsShouldThrowWrongUserDetailsException() throws Exception{
-        failure.expect(WrongUserDetailsException.class);
+    public void unsuccessfulCheckCredentialsShouldThrowWrongUserDetailsException() {
+        try{
+            method.invoke(login, "","");
+            fail("should have thrown a WrongUserDetailsException");
+        }
+        catch(InvocationTargetException e){
+            assertThat(e.getCause(), instanceOf(WrongUserDetailsException.class));
 
-        login.checkCredentials("","");
+        }
+        catch(Exception e){
+            fail("Wrong exception thrown");
+        }
+
     }
 
 

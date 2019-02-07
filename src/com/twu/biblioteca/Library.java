@@ -171,7 +171,7 @@ public class Library {
      * @param reader to make sure that the app only uses 1 Scanner
      * @return the user input
      */
-    public String askForTitle(Scanner reader){
+    private String askForTitle(Scanner reader){
         System.out.print("Enter title of book: ");
         String input = reader.nextLine();
         return input;
