@@ -69,7 +69,7 @@ public class MainMenu {
 
         reader = new Scanner(System.in);
 
-        login.loginProcess(reader);
+        login.loginProcess(reader, System.out);
 
         int input = -1;
 

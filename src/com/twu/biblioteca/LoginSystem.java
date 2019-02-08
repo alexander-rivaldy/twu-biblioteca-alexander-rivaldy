@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,17 +18,22 @@ public class LoginSystem {
         currentUser = null;
     }
 
-    public boolean loginProcess(Scanner reader) {
+    public boolean loginProcess(Scanner reader, PrintStream output) {
         String libNum;
         String pass;
-        while (currentUser == null) {
-            System.out.println("Enter library number (xxx-xxxx): ");
+        do {
+            output.println("Enter library number (xxx-xxxx): ");
             libNum = reader.nextLine();
-            System.out.println("Enter password: ");
+            output.println("Enter password: ");
             pass = reader.nextLine();
 
             currentUser = checkCredentials(libNum, pass);
+
+            if(currentUser == null)
+                output.println("Wrong library number and/or password inputted, please try again!");
         }
+        while (currentUser == null);
+
         return true;
 
     }
@@ -39,9 +46,6 @@ public class LoginSystem {
         return currentUser;
     }
 
-    public void setActiveUser(Customer customer) {
-        currentUser = customer;
-    }
 
     private Customer checkCredentials(String libraryNumber, String password) {
 
