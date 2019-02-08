@@ -39,6 +39,10 @@ public class LoginSystem {
         return currentUser;
     }
 
+    public void setActiveUser(Customer customer) {
+        currentUser = customer;
+    }
+
     private Customer checkCredentials(String libraryNumber, String password) {
 
         for (Customer cust : customers) {
