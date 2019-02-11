@@ -12,9 +12,9 @@ import java.util.Scanner;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class menuIOTest {
+public class MenuIOTest {
 
-    static HashMap<Integer,String> list;
+    static HashMap<Integer, String> list;
 
     static MenuIO menuIO;
 
@@ -37,7 +37,7 @@ public class menuIOTest {
     }
 
     @Test
-    public void successfulListPrintWithOneItem(){
+    public void successfulListPrintWithOneItem() {
         list.put(1, "Item 1");
 
         menuIO.printMenuOptions(list);
@@ -76,7 +76,7 @@ public class menuIOTest {
 
         MenuIO menuIO = new MenuIO(outputStream, new Scanner(data));
 
-        assertThat(menuIO.askOptionInput(list),is(1));
+        assertThat(menuIO.askOptionInput(list), is(1));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class menuIOTest {
 
         String expected = "\nEnter your desired option: ";
 
-        assertThat(outputContent.toString(),is(expected));
+        assertThat(outputContent.toString(), is(expected));
     }
 
     @Test
@@ -106,7 +106,7 @@ public class menuIOTest {
                 "Value was not a number, please enter again\n\n" +
                 "\nEnter your desired option: ";
 
-        assertThat(outputContent.toString(),is(expected));
+        assertThat(outputContent.toString(), is(expected));
     }
 
     @Test
@@ -122,6 +122,6 @@ public class menuIOTest {
                 "Value not within options, please enter again\n\n" +
                 "\nEnter your desired option: ";
 
-        assertThat(outputContent.toString(),is(expected));
+        assertThat(outputContent.toString(), is(expected));
     }
 }

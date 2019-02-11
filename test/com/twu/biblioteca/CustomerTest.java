@@ -33,7 +33,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void shouldThrowWrongUserDetailsExceptionWithLibNumberError() throws Exception {
+    public void shouldThrowWrongUserDetailsExceptionWithLibNumberError() {
 
         cust = new Customer();
 

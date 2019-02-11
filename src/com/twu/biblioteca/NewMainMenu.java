@@ -70,7 +70,7 @@ public class NewMainMenu {
                 output.println(library.getAllMovieDetailsWithColumn());
                 break;
             case CHECKOUT_MOVIE:
-                output.println(library.borrowProcess(input, null, library.MOVIES));
+                output.println(library.borrowProcess(input, null, Library.MOVIES));
                 break;
             case BORROWED_BOOK:
                 output.println(library.getBorrowedBooksWithColumn());

@@ -18,19 +18,20 @@ public class MenuIO {
     public void printMessage(String message) {
         output.print(message);
     }
-//
-    public void printMenuOptions(HashMap<Integer,String> menuItems) {
+
+    //
+    public void printMenuOptions(HashMap<Integer, String> menuItems) {
         for (Map.Entry<Integer, String> option : menuItems.entrySet()) {
-            output.print(option.getKey() + ". " + option.getValue() + "\n") ;
+            output.print(option.getKey() + ". " + option.getValue() + "\n");
         }
     }
 
-    public int askOptionInput(HashMap<Integer,String> menuItems) {
+    public int askOptionInput(HashMap<Integer, String> menuItems) {
         boolean askForInput = true;
         String input;
         int option = -1;
 
-        while(askForInput){
+        while (askForInput) {
             output.print("\nEnter your desired option: ");
             try {
                 input = this.input.nextLine();
@@ -40,7 +41,7 @@ public class MenuIO {
                 continue;
             }
 
-            if( (askForInput = !menuItems.containsKey(option)) )
+            if ((askForInput = !menuItems.containsKey(option)))
                 output.println("Value not within options, please enter again\n");
         }
 

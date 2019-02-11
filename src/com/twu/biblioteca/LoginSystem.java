@@ -29,7 +29,7 @@ public class LoginSystem {
 
             currentUser = checkCredentials(libNum, pass);
 
-            if(currentUser == null)
+            if (currentUser == null)
                 output.println("Wrong library number and/or password inputted, please try again!");
         }
         while (currentUser == null);

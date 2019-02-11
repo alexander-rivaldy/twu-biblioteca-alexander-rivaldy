@@ -12,8 +12,9 @@ import static org.junit.Assert.assertEquals;
         CustomerTest.class,
         LibraryTest.class,
         LoginSystemTest.class,
-        MainMenuTest.class,
-        MovieTest.class
+        NewMainMenuTest.class,
+        MovieTest.class,
+        MenuIOTest.class
 })
 public class TestSuite {
 

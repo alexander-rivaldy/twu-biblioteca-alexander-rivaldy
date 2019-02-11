@@ -25,14 +25,14 @@ public class NewMainMenuTest {
 
     String listItems =
             "\nChoose an option from the list below: \n\n" +
-            "0. Quit\n" +
-            "1. Show User Info\n" +
-            "2. List of Books\n" +
-            "3. Checkout Book\n" +
-            "4. Return Book\n" +
-            "5. List of Movies\n" +
-            "6. Checkout Movie\n" +
-            "7. List of Borrowed Books\n";
+                    "0. Quit\n" +
+                    "1. Show User Info\n" +
+                    "2. List of Books\n" +
+                    "3. Checkout Book\n" +
+                    "4. Return Book\n" +
+                    "5. List of Movies\n" +
+                    "6. Checkout Movie\n" +
+                    "7. List of Borrowed Books\n";
 
     String promptUser = "\nEnter your desired option: ";
 
@@ -77,7 +77,7 @@ public class NewMainMenuTest {
         mainMenu = new NewMainMenu(outputStream, new Scanner("123-4567\npassword\n1\n0\n"));
         mainMenu.run();
 
-        String expected = welcomeMessage + loginMessage + listItems + promptUser + userDetails + promptUser;
+        String expected = welcomeMessage + loginMessage + listItems + promptUser + userDetails + listItems + promptUser;
 
         assertThat(outputContent.toString(), is(expected));
     }
@@ -88,7 +88,7 @@ public class NewMainMenuTest {
         mainMenu = new NewMainMenu(outputStream, new Scanner("123-4567\npassword\n2\n0\n"));
         mainMenu.run();
 
-        String expected = welcomeMessage + loginMessage + listItems + promptUser + listOfBooks + promptUser;
+        String expected = welcomeMessage + loginMessage + listItems + promptUser + listOfBooks + listItems + promptUser;
 
         assertThat(outputContent.toString(), is(expected));
     }
