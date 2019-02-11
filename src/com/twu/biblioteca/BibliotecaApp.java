@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.util.Scanner;
+
 public class BibliotecaApp {
 
     /**
@@ -8,7 +10,7 @@ public class BibliotecaApp {
      * @param args
      */
     public static void main(String[] args) {
-        MainMenu menu = new MainMenu();
+        NewMainMenu menu = new NewMainMenu(System.out, new Scanner(System.in));
         menu.run();
     }
 }

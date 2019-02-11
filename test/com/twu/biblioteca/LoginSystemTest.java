@@ -23,7 +23,7 @@ public class LoginSystemTest {
     PrintStream outputStream;
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         login = new LoginSystem();
 
         Customer cust = new Customer("123-4567", "name", "0410123456", "test@email.com", "pass");
